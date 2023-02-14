@@ -1,0 +1,7 @@
+{
+  "name": "appKawabata",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
