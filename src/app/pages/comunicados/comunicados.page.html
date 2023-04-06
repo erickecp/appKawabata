@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comunicados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <swiper
+      [config]="config"
+      (swiper)="onSwiper($event)"
+      (slideChange)="onSlideChange()"
+    >
+      <ng-template swiperSlide >
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+    </swiper>
+
+    <ion-grid >
+      <ion-row>
+        <ion-col size="12">
+          <h2>Todos los comunicados:</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <ion-button fill="outline" color="tertiary" expand="block"  shape="round">
+          Actividades
+        </ion-button></ion-col>
+        <ion-col size="4">
+          <ion-button fill="outline" color="tertiary" expand="block" shape="round">
+          Eventos
+        </ion-button></ion-col>
+        <ion-col size="4">
+          <ion-button fill="outline" color="tertiary" expand="block" shape="round">
+          Preescolar
+        </ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngFor="let i of  [1,1,1,1]">
+          <ion-card>
+            <ion-grid>
+              <ion-row>
+                <ion-col  size="4">
+                 <img src="./assets/kawa.png">
+                </ion-col>
+                <ion-col size="8">
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea harum obcaecati incidunt rerum, odit perspiciatis eius numquam ullam inventore earum nesciunt explicabo officiis praesentium voluptate ad fugit nulla minus facilis!</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

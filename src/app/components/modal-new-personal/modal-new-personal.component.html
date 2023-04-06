@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nuevo Personal Autorizado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="fomrPersonal" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Colonia</ion-label>
+      <ion-input type="text" formControlName="colonia"></ion-input>
+      <span *ngIf="validaControl('colonia')" slot="error"> La colonia es obligatoria</span>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+      <span *ngIf="validaControl('nombre')" slot="error"> El nombre es obligatorio</span>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input type="text" formControlName="direccion"></ion-input>
+      <span *ngIf="validaControl('direccion')" slot="error"> La colonia es obligatoria</span>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Parentesco</ion-label>
+      <ion-input type="text" formControlName="parentesco"></ion-input>
+      <span *ngIf="validaControl('parentesco')" slot="error"> El parentesco es obligatorio</span>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="number" formControlName="telefono"></ion-input>
+      <span *ngIf="validaControl('telefono')" slot="error"> El telefono es obligatorio</span>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Teléfono Celular</ion-label>
+      <ion-input type="number" formControlName="telefonoCelular"></ion-input>
+      <span *ngIf="validaControl('telefonoCelular')" slot="error"> El telefono celular es obligatorio</span>
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button type="submit" expand="block" [disabled]="!fomrPersonal.valid">
+            {{ !user ? 'Agregar Persona' : 'Guardar Persona'}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+</ion-content>

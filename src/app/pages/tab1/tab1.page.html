@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title color="light">
+      Colegio
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-text color="tertiary"  >
+    <h1  class="ion-padding">RECOGER A: </h1>
+  </ion-text>
+
+  <ion-card >
+    <ion-card-header class="ion-no-padding">
+      <ion-item lines="none" >
+        <ion-avatar slot="start">
+          <img src="./assets/descarga.png" />
+        </ion-avatar>
+        <ion-label>
+          Parentesco: Papa
+          <p>Erick Eduardo Corro</p>
+        </ion-label>
+      </ion-item>
+      <ion-card-content >
+        <ion-text color="dark">
+          <h4>Alumnos a recoger:</h4>
+        </ion-text>
+
+        <ion-item (click)="recoger(a)" *ngFor="let a of alumnosTutor" lines="none" class="ion-no-padding">
+          <ion-badge slot="start">1-A</ion-badge>
+          <ion-label class="ion-no-padding">{{a.nombres}}</ion-label>
+        </ion-item>
+      </ion-card-content>
+
+
+    </ion-card-header>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="4" offset="4">
+          <ion-button (click)="compartir()" expand="block" color="danger" shape="round">
+            Entregado
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+</ion-content>

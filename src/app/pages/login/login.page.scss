@@ -1,0 +1,22 @@
+ion-card{
+  margin: 20px !important;
+  border-radius: 25px;
+  background-color: white;
+  box-shadow: none !important;
+
+}
+.item-native  {
+  background-color: white !important;
+}
+
+ion-content {
+  --ion-background-color: #F2F2F3 !important;
+}
+
+ion-input.custom {
+  --background: white !important;
+}
+ion-item::part(native) {
+  background: white !important;
+}
+

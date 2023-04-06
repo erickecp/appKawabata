@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Personas autorizadas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid >
+    <ion-row>
+      <ion-col size-sm="4" size-xs="6" offset-xs="6" offset-sm="8">
+        <ion-button (click)="newPersonal()" expand="block" color="success" shape="round">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Agregar Nuevo
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card *ngFor="let auth of autorizados">
+    <ion-card-header class="ion-no-padding">
+      <ion-item lines="none" >
+        <ion-avatar slot="start">
+          <img src="./assets/descarga.png" />
+        </ion-avatar>
+        <ion-label>
+          Parentesco: {{auth.parentesco | uppercase}}
+          <p>{{auth.nombre | uppercase}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-header>
+
+      <ion-card-content >
+        <ion-item lines="none">
+          <ion-label>Acción:</ion-label>
+          <ion-button (click)="deletePersonal(auth.id)" slot="end" fill="clear" >
+            <ion-icon color ="tertiary" slot="icon-only" name="trash-outline" ></ion-icon>
+          </ion-button>
+          <ion-button  (click)="editarPersonal(auth)"  slot="end" fill="clear" >
+            <ion-icon  color ="tertiary" slot="icon-only" name="create-outline" ></ion-icon>
+          </ion-button>
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+
+
+      </ion-card-content>
+
+
+
+
+  </ion-card>
+</ion-content>

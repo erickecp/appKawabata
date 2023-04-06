@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 2
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <swiper
+      [config]="config"
+      (swiper)="onSwiper($event)"
+      (slideChange)="onSlideChange()"
+    >
+      <ng-template swiperSlide >
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+      <ng-template swiperSlide>
+        <ion-card>
+          <ion-img src="./assets/kawa.png"></ion-img>
+        </ion-card>
+      </ng-template>
+    </swiper>
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card color="tertiary" class="ion-text-center">
+            <ion-card-content>
+              <h1>
+                Ya llegue!
+              </h1>
+                <ion-icon  slot="icon-only" name="briefcase"></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card color="tertiary" class="ion-text-center">
+            <ion-card-content>
+              <h1>
+                Tareas
+              </h1>
+                <ion-icon  slot="icon-only" name="library"></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card color="tertiary" class="ion-text-center">
+            <ion-card-content>
+              <h1>
+                Noticias
+              </h1>
+                <ion-icon  slot="icon-only" name="megaphone"></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card color="tertiary" class="ion-text-center">
+            <ion-card-content>
+              <h1>
+                Boleta
+              </h1>
+                <ion-icon  slot="icon-only" name="bar-chart"></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+</ion-content>

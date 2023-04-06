@@ -1,0 +1,20 @@
+ion-avatar {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+}
+
+ion-card{
+  margin: 20px !important;
+  border-radius: 25px;
+  background-color: white;
+}
+
+ion-item::part(native) {
+  background: white !important;
+}
+
+
+ion-content {
+  --ion-background-color: #F2F2F3 !important;
+}
