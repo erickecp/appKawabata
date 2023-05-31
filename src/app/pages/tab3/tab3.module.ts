@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 import { ComponentsModule } from '../../components/components.module';
+import { NoimagePipe } from 'src/app/pipes/noimage.pipe';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 
@@ -14,6 +16,7 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     ComponentsModule,
+    PipesModule,
     Tab3PageRoutingModule
   ],
   declarations: [Tab3Page]

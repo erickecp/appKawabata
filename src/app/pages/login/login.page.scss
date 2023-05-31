@@ -2,7 +2,6 @@ ion-card{
   margin: 20px !important;
   border-radius: 25px;
   background-color: white;
-  box-shadow: none !important;
 
 }
 .item-native  {
@@ -11,6 +10,14 @@ ion-card{
 
 ion-content {
   --ion-background-color: #F2F2F3 !important;
+}
+ion-footer {
+  --ion-background-color: #F2F2F3 !important;
+}
+
+.back {
+  background-color: #F2F2F3 !important;
+
 }
 
 ion-input.custom {

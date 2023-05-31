@@ -1,9 +1,8 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>recogerqr</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<ion-toolbar class="ion-text-center">
+  <ion-title class="theme-title">
+    Generar QR
+  </ion-title>
+</ion-toolbar>
 <ion-content>
   <ion-grid >
     <ion-row>
@@ -12,6 +11,58 @@
           <img width="100%" [src]="qrCodeImage" />
         </div>
       </ion-col>
+    </ion-row>
+    <ion-row *ngIf="alumnosFila.length">
+      <ion-col size="12" class="ion-padding">
+        <h1 color="tertiary">Tutorados en Fila:</h1>
+      </ion-col>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item *ngFor="let tut of alumnosFila">
+            <ion-badge color="danger" slot="end">{{tut.estado | estado }}</ion-badge>
+            <ion-label>{{ tut.student.nombres + ' ' + tut.student.apellidos }}</ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-padding">
+        <h1 color="tertiary">RECOGER A:</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>Quien recoje?</ion-label>
+          <ion-select (ionChange)="asignAuth($event)" [(ngModel)]="authQ" name="authQ"    placeholder="Select Pizza">
+            <ion-select-option *ngFor="let auth of autorizados"
+            [value]="auth">{{auth.nombre }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" >
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Selecciona al alumno o alumnos por quien viene:</ion-label>
+          </ion-list-header>
+          <ion-item *ngFor="let al of alumnosTutor">
+            <ion-label>{{al.nombres +' '+ al.apellidos}}</ion-label>
+            <ion-checkbox [value]="al" (ionChange)="selectAlum($event)" color="success" mode="ios" justify="start"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button [disabled]="!alumnosQR.length || !authQ" (click)="generateQRCode()" color="success"  expand="block"  shape="round">
+          Confirmar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button [disabled]="!alumnosQR.length || !qrCodeImage" (click)="imageDw()" color="success"  expand="block"  shape="round">
+          Descargar
+        </ion-button>
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 

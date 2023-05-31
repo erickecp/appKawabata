@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalComunicadoComponent } from './modal-comunicado/modal-comunicado.component';
 
 
 
 @NgModule({
   declarations: [
-    ModalNewPersonalComponent
+    ModalNewPersonalComponent,
+    ModalComunicadoComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    ModalNewPersonalComponent
+    ModalNewPersonalComponent,
+    ModalComunicadoComponent
   ]
 })
 export class ComponentsModule { }

@@ -1,35 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title color="light">
+  <ion-toolbar class="ion-text-center">
+    <ion-title  color="light" class="theme-title">
       Colegio
     </ion-title>
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="./"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
   <ion-text color="tertiary"  >
     <h1  class="ion-padding">RECOGER A: </h1>
   </ion-text>
-
-  <ion-card >
+<div *ngIf="alumnosTutor.length">
+  <ion-card *ngFor="let a of alumnosTutor" color="primary" >
     <ion-card-header class="ion-no-padding">
       <ion-item lines="none" >
         <ion-avatar slot="start">
-          <img src="./assets/descarga.png" />
+          <img [src]="getImage(a.auth.fotoPerfil)" />
         </ion-avatar>
         <ion-label>
-          Parentesco: Papa
-          <p>Erick Eduardo Corro</p>
+          Parentesco: {{a.auth.parentesco}}
+          <p>{{a.auth.nombre}}</p>
         </ion-label>
       </ion-item>
-      <ion-card-content >
+
+      <ion-card-content  >
         <ion-text color="dark">
           <h4>Alumnos a recoger:</h4>
         </ion-text>
 
-        <ion-item (click)="recoger(a)" *ngFor="let a of alumnosTutor" lines="none" class="ion-no-padding">
-          <ion-badge slot="start">1-A</ion-badge>
-          <ion-label class="ion-no-padding">{{a.nombres}}</ion-label>
+        <ion-item   lines="none" class="ion-no-padding">
+          <ion-badge slot="start">{{ a.student.grado + '°' +'-'+ a.student.grupo.grupo  }}</ion-badge>
+          <ion-label  class="ion-no-padding">{{a.student.nombres}}</ion-label>
         </ion-item>
       </ion-card-content>
 
@@ -37,13 +39,27 @@
     </ion-card-header>
     <ion-grid class="ion-no-padding">
       <ion-row>
-        <ion-col size="4" offset="4">
-          <ion-button (click)="compartir()" expand="block" color="danger" shape="round">
-            Entregado
+        <ion-col size="8" offset="2" class="ion-margin-bottom">
+          <ion-button  (click)="enviaraFila(a)" expand="block" [color]="getColor(a.estado).color" shape="round">
+            {{
+              getColor(a.estado).estate
+            }}
           </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
 
   </ion-card>
+</div>
+<ion-grid *ngIf="!alumnosTutor.length">
+  <ion-row>
+    <ion-col offset="2" size="8" class="ion-text-center">
+      <h2>Aun no hay alumnos...</h2>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
 </ion-content>

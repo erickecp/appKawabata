@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="close()">
+      <ion-button color="danger" (click)="close()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,40 +11,56 @@
 
 <ion-content>
   <form [formGroup]="fomrPersonal" (ngSubmit)="submitForm()">
-    <ion-item>
-      <ion-label position="floating">Colonia</ion-label>
-      <ion-input type="text" formControlName="colonia"></ion-input>
-      <span *ngIf="validaControl('colonia')" slot="error"> La colonia es obligatoria</span>
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col offset="4" size="4">
+          <ion-thumbnail>
+            <ion-img id="imgProfMod" [src]="picture" alt="Picture"></ion-img>
+          </ion-thumbnail>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item lines="none" #itemPicture>
+      <input  formControlName="fotoPerfil"  id="files" class="input-files"
+        (click)="changeProfile( $event )" accept="image/png, image/jpg, image/jpeg" />
+      <label for="files" class="label-files noSelect">
+        Foto de perfil
+      </label>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" formControlName="nombre"></ion-input>
+      <ion-input type="text" formControlName="nombre" placeholder="Nombre"></ion-input>
       <span *ngIf="validaControl('nombre')" slot="error"> El nombre es obligatorio</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Dirección</ion-label>
-      <ion-input type="text" formControlName="direccion"></ion-input>
-      <span *ngIf="validaControl('direccion')" slot="error"> La colonia es obligatoria</span>
+      <ion-input type="text" formControlName="direccion" placeholder="Dirección"></ion-input>
+      <span *ngIf="validaControl('direccion')" slot="error"> La direccion es obligatoria</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Parentesco</ion-label>
-      <ion-input type="text" formControlName="parentesco"></ion-input>
+      <ion-input type="text" formControlName="colonia" placeholder="Colonia"></ion-input>
+      <span *ngIf="validaControl('colonia')" slot="error"> La colonia es obligatoria</span>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" formControlName="parentesco" placeholder="Parentesco"></ion-input>
       <span *ngIf="validaControl('parentesco')" slot="error"> El parentesco es obligatorio</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Teléfono</ion-label>
-      <ion-input type="number" formControlName="telefono"></ion-input>
+      <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
+      <span *ngIf="validaControl('email')" slot="error"> El email es obligatorio</span>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" formControlName="telefono" placeholder="Teléfono"></ion-input>
       <span *ngIf="validaControl('telefono')" slot="error"> El telefono es obligatorio</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Teléfono Celular</ion-label>
-      <ion-input type="number" formControlName="telefonoCelular"></ion-input>
+      <ion-input type="number" formControlName="telefonoCelular" placeholder="Teléfono Celular"></ion-input>
       <span *ngIf="validaControl('telefonoCelular')" slot="error"> El telefono celular es obligatorio</span>
     </ion-item>
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="6">
-          <ion-button type="submit" expand="block" [disabled]="!fomrPersonal.valid">
+        <ion-col class="ion-text-center" offset="3" size="6">
+          <ion-button color="success" type="submit"expand="block" color="success" shape="round" [disabled]="!fomrPersonal.valid">
             {{ !user ? 'Agregar Persona' : 'Guardar Persona'}}
           </ion-button>
         </ion-col>

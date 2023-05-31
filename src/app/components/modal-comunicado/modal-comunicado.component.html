@@ -1,0 +1,27 @@
+  <ion-toolbar class="ion-text-center">
+    <ion-title  color="light">
+      Comunicados
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close()">
+        <ion-icon color="light" slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+<ion-content class="ion-padding" >
+<img class="img-comunicado" [src]="getImage(doc.image)">
+<ion-grid >
+  <ion-row>
+    <ion-col class="ion-text-center ion-no-padding" size="12">
+      <span style="font-weight: bold;" >{{doc.title}}</span>
+      <br>
+      <span>{{doc.fechaPublicacion | date: 'mediumDate'}}</span>
+    </ion-col>
+    <ion-col size="12">
+      <div [innerHTML]="doc?.body" ></div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

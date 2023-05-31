@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup , Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPage implements OnInit {
   formLogin!: FormGroup;
+  mostrarPassword = false;
   constructor(
     private fb: FormBuilder,
     private authS: AuthService,
+    private alertS: AlertsService,
     private route: Router
   ) { }
 
@@ -34,6 +37,8 @@ export class LoginPage implements OnInit {
     this.authS.login(this.formLogin.value).subscribe(
       resp => {
         console.log(resp)
+      }, (err: any) => {
+          this.alertS.generateToastError(err.error.message)
       }
     );
     }

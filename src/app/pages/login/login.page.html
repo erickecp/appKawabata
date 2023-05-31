@@ -3,19 +3,19 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-col size="12">
-        <ion-img src="../assets/descarga.png"></ion-img>
+      <ion-col offset="2" size="8"class="ion-padding">
+        <ion-img  src="../assets/logokawabata.png"></ion-img>
       </ion-col>
     </ion-row>
    <form  [formGroup]="formLogin" >
     <ion-row class="ion-text-start">
       <ion-col size="12">
         <ion-text>
-          <h1>INICIAR SESIÓN</h1>
+          <h1 class="theme-title">INICIAR SESIÓN</h1>
         </ion-text>
       </ion-col>
       <ion-col size="12">
-        <ion-label>Ingresa la matricula y contraseña</ion-label>
+        <ion-label>Ingresa el usuario y contraseña</ion-label>
       </ion-col>
     </ion-row>
     <ion-card  >
@@ -25,29 +25,41 @@
       <ion-col size="12">
         <ion-item>
           <ion-label position="floating">UserWeb</ion-label>
-          <ion-input class="custom" type="password" formControlName="userWeb"></ion-input>
+          <ion-input class="custom" type="text" formControlName="userWeb"></ion-input>
           <ion-icon name="person" slot="start"></ion-icon>
         </ion-item>
       </ion-col>
       <ion-col size="12" >
-        <ion-item>
-          <ion-label position="floating">*******</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
+        <ion-item >
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input class="custom" type="{{ mostrarPassword ? 'text' : 'password' }}" formControlName="password">
+          </ion-input>
+          <ion-button size="large" color="dark" fill="clear" slot="end" *ngIf="!mostrarPassword" (click)="mostrarPassword = true">
+            <ion-icon name="eye"></ion-icon>
+          </ion-button>
+          <ion-button size="large" color="dark" fill="clear" slot="end" *ngIf="mostrarPassword" (click)="mostrarPassword = false">
+            <ion-icon name="eye-off"></ion-icon>
+          </ion-button>
           <ion-icon name="lock-closed" slot="start"></ion-icon>
         </ion-item>
       </ion-col>
+
     </ion-row>
+
     </ion-card>
+
+    <ion-row>
+      <ion-col size="4" offset="4" class="ion-no-padding">
+        <ion-button (click)="submit()" color="danger" expand="block" shape="round">
+          Iniciar
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </form>
+
 
 
   </ion-grid>
 
 </ion-content>
-  <ion-row class="ion-margin-bottom">
-    <ion-col size="3" offset="9">
-      <ion-button (click)="submit()" color="medium" expand="block" shape="round">
-        Iniciar
-      </ion-button>
-    </ion-col>
-  </ion-row>
+

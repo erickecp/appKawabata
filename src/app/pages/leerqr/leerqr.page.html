@@ -1,0 +1,65 @@
+<ion-toolbar class="ion-text-center">
+  <ion-title  color="light" class="theme-title">
+    Lector
+  </ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="closeScanner()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+<ion-grid fixed>
+  <ion-row  class="ion-text-center">
+    <ion-col size="6">
+      <h2  class="ion-text-center"> Scanner QR</h2>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset="2" size="8">
+      <ion-button (click)="leerQR()" expand="block" fill="solid"  color="tertiary">
+        <label class="ion-padding-end"> Leer QR</label>
+        <ion-icon name="qr-code-outline"></ion-icon>
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-card *ngIf="personaAuth" >
+        <ion-img [src]="getImage(personaAuth?.fotoPerfil)"></ion-img>
+        <ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-label>Nombre: {{personaAuth?.nombre}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Parentesco: {{personaAuth?.parentesco}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Dirección: {{personaAuth?.direccion}}</ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-card-subtitle></ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label style="font-weight: 800;">Alumnos a recojer: </ion-label>
+          <ion-item *ngFor="let alumno of info.alumnos">
+            <ion-text>{{alumno.nombre + ' ' + alumno.apellidos}}</ion-text>
+          </ion-item>
+
+          <ion-button (click)="aceptarAutorizado()"
+          color="danger" expand="block" >
+            Aceptar
+          </ion-button>
+
+        </ion-card-content>
+
+
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+</ion-content>

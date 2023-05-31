@@ -1,0 +1,66 @@
+<ion-toolbar class="ion-text-center">
+  <ion-title class="theme-title">
+    Mi Perfil
+  </ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="logout()">
+      <ion-icon color="danger" slot="start" name="power"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col offset="4" size="4">
+        <ion-thumbnail>
+          <ion-img id="imgProf" [src]="usuario.fotoPerfil | noimage"  alt="Picture"></ion-img>
+        </ion-thumbnail>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-item lines="none" #itemPicture>
+    <input [(ngModel)]="fotoPerfil" required  name="files" id="files" class="input-files"
+      (click)="changeProfile( $event )" accept="image/png, image/jpg, image/jpeg" />
+    <label for="files" class="label-files noSelect">
+      Foto de perfil
+    </label>
+  </ion-item>
+
+  <ion-item color="danger" *ngIf="usuario.fotoPerfil === null" class="ion-text-center animate__bounce">
+    <ion-label > Sube una foto de Perfil </ion-label>
+  </ion-item>
+  <ion-item color="danger" *ngIf="usuario.fotoPerfil === null && !usuario.fotoPerfilOk" class="ion-text-center animate__bounce">
+    <ion-label > Tu fotografia fue rechazada </ion-label>
+  </ion-item>
+
+  <ion-list>
+    <ion-item >
+      <ion-label>
+        <h3>Nombre:</h3>
+        <h6>{{usuario.nombres + '' + usuario.apellidos}}</h6>
+      </ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-label>
+        <h3>Email:</h3>
+        <h6>{{usuario.email }}</h6>
+      </ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-label>
+        <h3>Telefono:</h3>
+        <h6>{{usuario.telefono}}</h6>
+      </ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-label>
+        <h3>Nombre:</h3>
+        <h6>{{usuario.telefonoCelular}}</h6>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

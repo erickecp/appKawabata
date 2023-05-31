@@ -1,0 +1,69 @@
+ion-thumbnail {
+  --size: 80px;
+  --border-radius: 14px;
+}
+
+
+
+#itemPicture {
+  --background: transparent !important;
+  cursor: pointer;
+  font-size: 200px;
+  text-align: start;
+}
+h3{
+  font-weight: bolder;
+}
+
+.card-img-top{
+  height: 25vh;
+  object-fit: cover;
+}
+
+
+
+.input-files {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  ion-icon {
+      margin-top: 10px !important;
+  }
+}
+
+.input-files + .label-files {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.input-files:focus + .label-files,
+.input-files + .label-files:hover,
+.input-files + .label-files:hover {
+  background-color: var(--ion-color-danger);
+  border: none;
+  border: none;
+  color: white;
+}
+.input-files:focus + .label-files .icon,
+.input-files + .label-files:hover .icon,
+.input-files + .label-files:hover .icon {
+  color: var(--ion-color-light);
+}
+
+.label-files {
+  align-items: center;
+  border: 1px solid var(--ion-color-danger);
+  color: var(--ion-color-danger);
+  display: flex !important;
+  height: 30px;
+  border-radius: 5px;
+  justify-content: center;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}

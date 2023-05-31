@@ -1,86 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
+  <ion-toolbar class="ion-text-center">
+    <ion-title class="theme-title">
+      Home
     </ion-title>
   </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <swiper
-      [config]="config"
-      (swiper)="onSwiper($event)"
-      (slideChange)="onSlideChange()"
-    >
-      <ng-template swiperSlide >
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-    </swiper>
+  <swiper-container  #swiper  [autoplay]="{delay: 3000}"   >
+    <swiper-slide class="ion-padding">
+        <img width="100%" height="100%" src="./assets/kawa.png">
+    </swiper-slide>
+    <swiper-slide class="ion-padding">
+      <img width="100%" height="100%" src="https://img.freepik.com/vector-gratis/fondo-plano-rebajas-regreso-escuela_52683-68416.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
+    </swiper-slide>
+    <swiper-slide class="ion-padding">
+      <img width="100%" height="100%" src="https://img.freepik.com/vector-gratis/ilustracion-plana-fiesta-regreso-escuela_23-2149477157.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
+    </swiper-slide>
+  </swiper-container>
 
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="6">
-          <ion-card color="tertiary" class="ion-text-center">
-            <ion-card-content>
-              <h1>
-                Ya llegue!
-              </h1>
-                <ion-icon  slot="icon-only" name="briefcase"></ion-icon>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col size="6">
-          <ion-card color="tertiary" class="ion-text-center">
-            <ion-card-content>
-              <h1>
-                Tareas
-              </h1>
-                <ion-icon  slot="icon-only" name="library"></ion-icon>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+        <ion-col size="6" >
+            <!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+              <img src="./assets/Ya llegue.svg" alt="" (click)="recoger()">
 
-      <ion-row>
-        <ion-col size="6">
-          <ion-card color="tertiary" class="ion-text-center">
-            <ion-card-content>
-              <h1>
-                Noticias
-              </h1>
-                <ion-icon  slot="icon-only" name="megaphone"></ion-icon>
-            </ion-card-content>
-          </ion-card>
+
         </ion-col>
+        <ion-col size="6" *ngIf="user === 'TUTOR'">
+            <img src="./assets/Autorizados.svg" (click)="goToAuth('tab3')" >
+        </ion-col>
+
         <ion-col size="6">
+            <img src="./assets/Noticias.svg" (click)="goToAuth('comunicados')">
+        </ion-col>
+        <!-- <ion-col size="6">
           <ion-card color="tertiary" class="ion-text-center">
             <ion-card-content>
               <h1>
@@ -89,7 +41,7 @@
                 <ion-icon  slot="icon-only" name="bar-chart"></ion-icon>
             </ion-card-content>
           </ion-card>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
 
     </ion-grid>

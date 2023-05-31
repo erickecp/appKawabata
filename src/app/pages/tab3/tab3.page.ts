@@ -76,7 +76,8 @@ export class Tab3Page {
   async newPersonal() {
     const modal = await this.modalController.create({
       component: ModalNewPersonalComponent,
-      mode: 'ios',
+      mode: 'md',
+      initialBreakpoint: 0.75,
       cssClass: 'email-component',
       componentProps: {
         mailTo: this.idUser
@@ -85,11 +86,23 @@ export class Tab3Page {
     await modal.present();
   }
 
+  activar(id: any, active: boolean) {
+    console.log('activar', active );
+    this.personalS.activar(id, { active: active }).subscribe( res => {
+      console.log('active', res);
+      if(res){
+        this.alertS.generateToastSuccess( active ? 'Activo' : 'Inactivo' );
+        this.personalS.setACTIVEPER(id);
+      }
+    })
+  }
+
 
   async editarPersonal(auth: any) {
     const modal = await this.modalController.create({
       component: ModalNewPersonalComponent,
       mode: 'ios',
+      initialBreakpoint: 0.7,
       cssClass: 'email-component',
       componentProps: {
         user: auth

@@ -1,84 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Comunicados</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar class="ion-text-center">
+  <ion-title>
+    Comunicados
+  </ion-title>
+</ion-toolbar>
 
 <ion-content>
 
-  <swiper
-      [config]="config"
-      (swiper)="onSwiper($event)"
-      (slideChange)="onSlideChange()"
-    >
-      <ng-template swiperSlide >
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-      <ng-template swiperSlide>
-        <ion-card>
-          <ion-img src="./assets/kawa.png"></ion-img>
-        </ion-card>
-      </ng-template>
-    </swiper>
+  <swiper-container  #swiper  [autoplay]="{delay: 3000}" [slidesPerView]="1.5"   >
+    <swiper-slide class="ion-padding">
+        <img class="slide-img" src="./assets/kawa.png">
+    </swiper-slide>
+    <swiper-slide class="ion-padding">
+      <img class="slide-img" src="https://img.freepik.com/vector-gratis/fondo-plano-rebajas-regreso-escuela_52683-68416.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
+    </swiper-slide>
+    <swiper-slide class="ion-padding">
+      <img class="slide-img" src="https://img.freepik.com/vector-gratis/ilustracion-plana-fiesta-regreso-escuela_23-2149477157.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
+    </swiper-slide>
+  </swiper-container>
+
+
 
     <ion-grid >
       <ion-row>
         <ion-col size="12">
-          <h2>Todos los comunicados:</h2>
+          <h5 style="font-weight: bold;">Todos los comunicados:</h5>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size="4">
-          <ion-button fill="outline" color="tertiary" expand="block"  shape="round">
-          Actividades
-        </ion-button></ion-col>
-        <ion-col size="4">
-          <ion-button fill="outline" color="tertiary" expand="block" shape="round">
-          Eventos
-        </ion-button></ion-col>
-        <ion-col size="4">
-          <ion-button fill="outline" color="tertiary" expand="block" shape="round">
-          Preescolar
-        </ion-button></ion-col>
-      </ion-row>
+      <ion-segment class="noscroll" scrollable="true" value="pizza" >
+        <ion-col >
+          <ion-button (click)="filtrarEstudiantes('')"  [fill]="getFill('')"  color="tertiary" shape="round">
+            <ion-label style="font-weight: bold;">Todos</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col >
+          <ion-button (click)="filtrarEstudiantes('Eventos')"   [fill]="getFill('Eventos')"   color="tertiary" shape="round">
+            <ion-label style="font-weight: bold;">Eventos</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col >
+          <ion-button (click)="filtrarEstudiantes('Calendarios')" [fill]="getFill('Calendarios')"   color="tertiary" shape="round">
+            <ion-label style="font-weight: bold;">Calendarios</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col >
+          <ion-button (click)="filtrarEstudiantes('Avisos')" [fill]="getFill('Avisos')"   color="tertiary" shape="round">
+            <ion-label style="font-weight: bold;">Avisos</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col >
+          <ion-button (click)="filtrarEstudiantes('Encuestas')" [fill]="getFill('Encuestas')"   color="tertiary"  shape="round">
+            <ion-label style="font-weight: bold;">Encuestas</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-segment>
+
     </ion-grid>
-    <ion-grid>
+    <ion-grid *ngIf="comunicados.length">
       <ion-row>
-        <ion-col size="12" *ngFor="let i of  [1,1,1,1]">
-          <ion-card>
+        <ion-col size="12" *ngFor="let com of  comunicadosFilter">
+          <ion-card (click)="openModalComunicado(com)">
             <ion-grid>
               <ion-row>
-                <ion-col  size="4">
-                 <img src="./assets/kawa.png">
+                <ion-col  size="5">
+                  <img [src]="getImage(com.image)  " class="img-fluid"  style="width: 100%;"alt="">
                 </ion-col>
-                <ion-col size="8">
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea harum obcaecati incidunt rerum, odit perspiciatis eius numquam ullam inventore earum nesciunt explicabo officiis praesentium voluptate ad fugit nulla minus facilis!</p>
+                <ion-col size="7">
+                  <ion-card-content style="color: black" >
+                    <h4>{{com.fechaPublicacion | date: 'mediumDate'   }}</h4>
+                    <h2 style="font-weight: 900;" >{{com.title?.toUpperCase()}}</h2>
+                    <div [innerHTML]="com?.body" ></div>
+                  </ion-card-content>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid fixed *ngIf="!comunicados.length">
+      <ion-row class="ion-text-center">
+        <ion-col size="12" class="ion-margin" >
+          No hay comunicados...
         </ion-col>
       </ion-row>
     </ion-grid>
