@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { TutoresService } from 'src/app/services/tutores.service';
 import { AlertController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-perfil',
@@ -12,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class PerfilPage implements OnInit {
   fotoPerfil = '';
+  imgUrl = environment.URLAPIIMG;
   usuario : any;
   idUsuario: any;
   currentFile?: any[] = [];
@@ -97,7 +99,7 @@ export class PerfilPage implements OnInit {
 
     getImage(name: string){
 
-      return `http://localhost:3006/api/estudiante/file/${name}`;
+      return `${this.imgUrl}${name}`;
    // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
    }
 

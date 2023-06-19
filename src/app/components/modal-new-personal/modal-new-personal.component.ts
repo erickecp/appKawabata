@@ -6,6 +6,7 @@ import { PersonalAuthService } from 'src/app/services/personal-auth.service';
 import { throwError } from 'rxjs';
 import { AlertsService } from '../../services/alerts.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-new-personal',
@@ -16,6 +17,7 @@ export class ModalNewPersonalComponent implements OnInit {
   fomrPersonal!: FormGroup;
   @Input()
   user:any;
+  imgUrl = environment.URLAPIIMG;
   id = 0;
   picture = './assets/logokawabata.png';
   currentFile?: any[] = [];
@@ -154,7 +156,7 @@ export class ModalNewPersonalComponent implements OnInit {
 
   getImage(name: string){
 
-    return `http://localhost:3006/api/estudiante/file/${name}`;
+    return `${this.imgUrl}${name}`;
  // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
  }
 

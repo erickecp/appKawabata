@@ -7,6 +7,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
 import { FilaService } from 'src/app/services/fila.service';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { AlertsService } from 'src/app/services/alerts.service';
 export class Tab1Page {
   backgroundUrl = './assets/descarga.png'
   userId!: number;
+  urlImg= environment.URLAPIIMG;
   user!: any;
   color = 'primary';
   alumnosTutor: any[] = [];
@@ -134,7 +136,7 @@ getColor(estado: string){
 
 
 getImage(name: string){
-  return `http://localhost:3006/api/estudiante/file/${name}`;
+  return `${this.urlImg}${name}`;
 // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
 }
 

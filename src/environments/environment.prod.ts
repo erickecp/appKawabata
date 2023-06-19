@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  URLAPI: 'https://api.colegiokawabata.com/api',
 };

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalComunicadoComponent } from 'src/app/components/modal-comunicado/modal-comunicado.component';
 import { ComunicadosService } from 'src/app/services/comunicados.service';
+import { environment } from 'src/environments/environment';
 import SwiperCore, {SwiperOptions} from 'swiper';
 
 @Component({
@@ -16,6 +17,7 @@ export class ComunicadosPage implements OnInit {
     private blogS: ComunicadosService
   ) { }
   selectedFilter = '';
+  imgUrl = environment.URLAPI;
   comunicados:any[] = [];
   comunicadosFilter: any[] = [];
   arrayNivelAlum: string[] = [];
@@ -120,7 +122,7 @@ export class ComunicadosPage implements OnInit {
 
 
   getImage(name: string){
-    return `http://localhost:3006/api/estudiante/file/${name}`;
+    return `${this.imgUrl}${name}`;
  // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
  }
 

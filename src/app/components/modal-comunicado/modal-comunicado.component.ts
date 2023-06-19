@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-comunicado',
@@ -7,6 +8,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal-comunicado.component.scss'],
 })
 export class ModalComunicadoComponent implements OnInit {
+  imgUrl = environment.URLAPIIMG;
   @Input()
   doc:any;
   constructor(
@@ -19,7 +21,7 @@ export class ModalComunicadoComponent implements OnInit {
   }
 
   getImage(name: string){
-    return `http://localhost:3006/api/estudiante/file/${name}`;
+    return `${this.imgUrl}${name}`;
  // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
  }
 

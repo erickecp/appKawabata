@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   URLAPI: 'http://localhost:3006/api',
+  URLAPIIMG: 'http://localhost:3006/api/estudiante/file/',
 };
 
 /*
