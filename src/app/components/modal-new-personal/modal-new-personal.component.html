@@ -20,6 +20,7 @@
           </ion-thumbnail>
         </ion-col>
       </ion-row>
+
     </ion-grid>
 
     <ion-item lines="none" #itemPicture>
@@ -29,6 +30,7 @@
         Foto de perfil
       </label>
     </ion-item>
+    <span *ngIf="nofoto" class="ion-text-center" style="color: red; margin-left: 10px;"  slot="error"> No hay foto de perfil</span>
     <ion-item>
       <ion-input type="text" formControlName="nombre" placeholder="Nombre"></ion-input>
       <span *ngIf="validaControl('nombre')" slot="error"> El nombre es obligatorio</span>
@@ -60,7 +62,7 @@
     <ion-grid fixed>
       <ion-row>
         <ion-col class="ion-text-center" offset="3" size="6">
-          <ion-button color="success" type="submit"expand="block" color="success" shape="round" [disabled]="!fomrPersonal.valid">
+          <ion-button color="success" type="submit"expand="block" color="success" shape="round">
             {{ !user ? 'Agregar Persona' : 'Guardar Persona'}}
           </ion-button>
         </ion-col>

@@ -4,6 +4,7 @@ import { PersonalAuthService } from '../../services/personal-auth.service';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { FilaService } from '../../services/fila.service';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-leerqr',
   templateUrl: './leerqr.page.html',
@@ -11,6 +12,7 @@ import * as moment from 'moment';
 })
 export class LeerqrPage implements OnInit {
   info: any;
+  imgUrl = environment.URLAPIIMG;
   personaAuth: any;
   alumnos: any[] = [];
   constructor(
@@ -33,7 +35,6 @@ export class LeerqrPage implements OnInit {
     const horaActual = moment();
     const horaExacta = horaActual.format('HH:mm');
     console.log(horaExacta)
-    console.log(fecha)
 
     document.querySelector('body')!.classList!.add('scanner-active');
     await BarcodeScanner.checkPermission({ force: true });
@@ -49,18 +50,22 @@ export class LeerqrPage implements OnInit {
     document.querySelector('body')?.classList?.remove('scanner-active');
     const datqr = JSON.parse(result.content);
     const formatDate = moment(datqr.fecha, 'YYYY-MM-DD');
+    console.log(datqr.hora)
+    const hora1 = moment(datqr.hora, 'HH:mm');
+    const hora2 = moment(horaExacta, 'HH:mm');
+
+    // Verificar si hora1 es anterior a hora2
+    const esAnterior = hora1.isBefore(hora2);
 
     const esIgual = fecha.isSame(formatDate);
+
     console.log(esIgual);
-    if(!esIgual){
+    console.log('Hora',esAnterior);
 
-      this.alerts.generateToastErrorQR('El Codido QR ha caducado!')
 
-    } else {
       this.info = datqr;
       this.getAutorizado();
       console.log(datqr); // log the raw scanned content
-    }
     }
 
   }
@@ -73,8 +78,7 @@ export class LeerqrPage implements OnInit {
   }
 
   getImage(name: string){
-
-    return `http://localhost:3006/api/estudiante/file/${name}`;
+    return `${this.imgUrl}${name}`;
  // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
  }
 

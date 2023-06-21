@@ -19,6 +19,7 @@ export class ModalNewPersonalComponent implements OnInit {
   user:any;
   imgUrl = environment.URLAPIIMG;
   id = 0;
+  nofoto = false;
   picture = './assets/logokawabata.png';
   currentFile?: any[] = [];
   constructor(
@@ -53,7 +54,7 @@ export class ModalNewPersonalComponent implements OnInit {
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([ab], { type: "image/png" });
+    const blob = new Blob([ab], { type: "" });
     // Crear la URL de la imagen
     const imageUrl = URL.createObjectURL(blob);
     // Utilizar la URL de la imagen
@@ -83,7 +84,6 @@ export class ModalNewPersonalComponent implements OnInit {
       this.generarURL(image)
       const bl = this.dataURItoBlob(image);
       this.currentFile![0] = bl;
-      console.log(this.currentFile)
 
       });
 
@@ -105,6 +105,14 @@ export class ModalNewPersonalComponent implements OnInit {
   }
 
   submitForm(){
+    this.nofoto = false;
+    if(this.fomrPersonal.invalid){
+      this.fomrPersonal.markAllAsTouched();
+      if(this.picture === './assets/logokawabata.png'){
+        this.nofoto =  true
+      }
+      return;
+    }
     const formData = new FormData();
     this.fomrPersonal.get('tutorId')?.patchValue(this.id);
     let form = this.fomrPersonal.value;

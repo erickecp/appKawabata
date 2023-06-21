@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import Swiper from 'swiper';
 import SwiperCore, { Autoplay } from 'swiper';
+import { AlertsService } from '../../services/alerts.service';
 SwiperCore.use([Autoplay]);
 @Component({
   selector: 'app-tab2',
@@ -16,6 +17,7 @@ export class Tab2Page implements AfterViewInit{
   user: any;
   constructor(
     private utilsS:UtilsService,
+    private alertsS:AlertsService,
     private authS: AuthService,
     private navigate: Router,
   ) {
@@ -42,9 +44,10 @@ recoger(){
   else if(this.user === 'ENTREGAR') {
     this.navigate.navigateByUrl('tabs/tab1')
   }
-   else {
+   else if(this.user === 'TUTOR'){
     this.navigate.navigateByUrl('tabs/recoger')
-
+  } else{
+    this.alertsS.generateToastError('Aun no tienes asignada ninguna responsabilidad, Intentalo mas tarde')
   }
 }
 goToAuth(ruta: string){

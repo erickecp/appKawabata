@@ -102,4 +102,11 @@ logout(){
   this.navCtrl.navigateRoot('/login');
 }
 
+modifyPerfil(img: any) {
+  const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
+
+  const newUser = { ...user, fotoPerfil : img };
+  localStorage.setItem('user', JSON.stringify(newUser));
+}
+
 }

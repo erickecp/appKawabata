@@ -45,6 +45,7 @@ export class PerfilPage implements OnInit {
       if(res.data === true){
         const formData = new FormData();
         this.compressImg.uploadFile().then(({image, orientation}) => {
+
         this.generarURL(image)
         const bl = this.dataURItoBlob(image);
         console.log(bl);
@@ -53,8 +54,9 @@ export class PerfilPage implements OnInit {
         if(this.currentFile){
           formData.append('fotoPerfil', this.currentFile[0]);
         }
-        this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  res => {
+        this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  (res: any) => {
         console.log(res);
+        this.authS.modifyPerfil(res.data.fotoPerfil);
         this.alertsS.generateToastSuccess('Foto de perfil Actualizada')
        } )
     });
@@ -89,9 +91,10 @@ export class PerfilPage implements OnInit {
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([ab], { type: "image/png" });
+    const blob = new Blob([ab], { type: "" });
     // Crear la URL de la imagen
     const imageUrl = URL.createObjectURL(blob);
+    this.authS.modifyPerfil(image);
     // Utilizar la URL de la imagen
     document.getElementById("imgProf")!.setAttribute(
       'src', imageUrl);
