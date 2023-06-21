@@ -24,14 +24,14 @@
 
       <ion-col size="12">
         <ion-item>
-          <ion-label position="floating">UserWeb</ion-label>
+          <ion-label style="margin-bottom: 5px !important;" position="floating">UserWeb</ion-label>
           <ion-input class="custom" type="text" formControlName="userWeb"></ion-input>
           <ion-icon name="person" slot="start"></ion-icon>
         </ion-item>
       </ion-col>
       <ion-col size="12" >
         <ion-item >
-          <ion-label position="floating">Contraseña</ion-label>
+          <ion-label style="margin-bottom: 5px !important;" position="floating">Contraseña</ion-label>
           <ion-input class="custom" type="{{ mostrarPassword ? 'text' : 'password' }}" formControlName="password">
           </ion-input>
           <ion-button size="large" color="dark" fill="clear" slot="end" *ngIf="!mostrarPassword" (click)="mostrarPassword = true">

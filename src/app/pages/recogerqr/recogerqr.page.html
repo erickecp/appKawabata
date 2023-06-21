@@ -35,7 +35,7 @@
       <ion-col size="12">
         <ion-item>
           <ion-label>Quien recoje?</ion-label>
-          <ion-select (ionChange)="asignAuth($event)" [(ngModel)]="authQ" name="authQ"    placeholder="Select Pizza">
+          <ion-select (ionChange)="asignAuth($event)" [(ngModel)]="authQ" name="authQ"    placeholder="Selecciona">
             <ion-select-option *ngFor="let auth of autorizados"
             [value]="auth">{{auth.nombre }}</ion-select-option>
           </ion-select>

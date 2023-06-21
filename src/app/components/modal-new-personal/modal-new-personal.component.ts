@@ -84,7 +84,6 @@ export class ModalNewPersonalComponent implements OnInit {
       this.generarURL(image)
       const bl = this.dataURItoBlob(image);
       this.currentFile![0] = bl;
-
       });
 
   }

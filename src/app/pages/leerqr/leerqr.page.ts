@@ -40,7 +40,7 @@ export class LeerqrPage implements OnInit {
     await BarcodeScanner.checkPermission({ force: true });
     // make background of WebView transparent
     // note: if you are using ionic this might not be enough, check below
-
+    BarcodeScanner.hideBackground();
     const result = await BarcodeScanner.startScan(
       { targetedFormats: [SupportedFormat.QR_CODE] }
     ); // start scanning and wait for a result
@@ -50,22 +50,14 @@ export class LeerqrPage implements OnInit {
     document.querySelector('body')?.classList?.remove('scanner-active');
     const datqr = JSON.parse(result.content);
     const formatDate = moment(datqr.fecha, 'YYYY-MM-DD');
-    console.log(datqr.hora)
     const hora1 = moment(datqr.hora, 'HH:mm');
     const hora2 = moment(horaExacta, 'HH:mm');
-
     // Verificar si hora1 es anterior a hora2
     const esAnterior = hora1.isBefore(hora2);
-
     const esIgual = fecha.isSame(formatDate);
-
-    console.log(esIgual);
-    console.log('Hora',esAnterior);
-
 
       this.info = datqr;
       this.getAutorizado();
-      console.log(datqr); // log the raw scanned content
     }
 
   }
