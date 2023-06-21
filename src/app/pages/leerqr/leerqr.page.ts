@@ -29,7 +29,10 @@ export class LeerqrPage implements OnInit {
   }
 
 
+
+
   async leerQR(){
+    document.querySelector('body')!.classList.add('scanner-active');
     const fechformat = moment().format();
     const fecha = moment(fechformat, 'YYYY-MM-DD');
     const horaActual = moment();
@@ -63,6 +66,7 @@ export class LeerqrPage implements OnInit {
   }
 
   async getAutorizado(){
+    document.querySelector('body')!.classList.remove('scanner-active');
     this.authS.getInfoAuth(this.info.autorizado.id).subscribe(info => {
       console.log(info);
       this.personaAuth = info;
