@@ -61,7 +61,6 @@ export class LeerqrPage implements OnInit {
 
   async getAutorizado(){
     document.querySelector('body')!.classList.remove('scanner-active');
-    BarcodeScanner.stopScan();
     this.authS.getInfoAuth(this.info.autorizado.id).subscribe(info => {
       console.log(info);
       this.personaAuth = info;
