@@ -57,7 +57,9 @@ export class LeerqrPage implements OnInit {
     const horaActual = moment();
     const horaExacta = horaActual.format('HH:mm');
 
-    const result = await BarcodeScanner.startScan();// start scanning and wait for a result
+    const result = await BarcodeScanner.startScan({
+      targetedFormats: [SupportedFormat.QR_CODE],
+    });// start scanning and wait for a result
 
     this.detenerEscanner();
 
