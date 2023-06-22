@@ -5,6 +5,7 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { FilaService } from '../../services/fila.service';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { App } from '@capacitor/app';
 @Component({
   selector: 'app-leerqr',
   templateUrl: './leerqr.page.html',
@@ -32,8 +33,25 @@ export class LeerqrPage implements OnInit {
 
 
   async leerQR(){
+    const resultPermisos = await BarcodeScanner.checkPermission({
+      force: true,
+    });
+
+    if (!resultPermisos.granted) {
+      console.log('No hay permisos');
+      return;
+    }
+
+    BarcodeScanner.prepare();
+    App.addListener('backButton', () => {
+      this.detenerEscanner();
+    });
+    
     BarcodeScanner.hideBackground();
+
     document.body.classList.add("qrscanner");
+    document.querySelector('body')?.classList?.add('scanner-active');
+
     const fechformat = moment().format();
     const fecha = moment(fechformat, 'YYYY-MM-DD');
     const horaActual = moment();
@@ -41,10 +59,10 @@ export class LeerqrPage implements OnInit {
 
     const result = await BarcodeScanner.startScan();// start scanning and wait for a result
 
+    this.detenerEscanner();
+
     // if the result has content
    if (result.hasContent) {
-    document.body.classList.remove("qrscanner");
-    document.querySelector('body')?.classList?.remove('scanner-active');
     const datqr = JSON.parse(result.content);
     const formatDate = moment(datqr.fecha, 'YYYY-MM-DD');
     const hora1 = moment(datqr.hora, 'HH:mm');
@@ -57,6 +75,15 @@ export class LeerqrPage implements OnInit {
       this.getAutorizado();
     }
 
+  }
+
+  async detenerEscanner() {
+    await BarcodeScanner.stopScan();
+    await BarcodeScanner.showBackground();
+    document.body.classList.remove("qrscanner");
+    document.querySelector('body')?.classList?.remove('scanner-active');
+
+    await App.removeAllListeners();
   }
 
   async getAutorizado(){
