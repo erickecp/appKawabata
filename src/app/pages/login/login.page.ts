@@ -26,10 +26,10 @@ export class LoginPage implements OnInit {
 
   generateForm() {
     this.formLogin = this.fb.group({
-      userWeb: ['', Validators.required],
+      userWeb: ['KW23003A', Validators.required],
       // userWeb: ['KW23003A', Validators.required],
       //password: ['12345', Validators.required]
-      password: ['', Validators.required]
+      password: ['12345', Validators.required]
     });
   }
 

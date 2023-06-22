@@ -56,10 +56,9 @@ swiper-slide img {
   --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
 
-body.scanner-active {
-  --background: transparent;
-  --ion-background-color: transparent;
-}
+.scanner-ui { display: none; }
+.scanner-hide { visibility: visible; }
 
-
-
+body.qrscanner { background-color: transparent; }
+body.qrscanner .scanner-ui { display: block; }
+body.qrscanner .scanner-hide { visibility: hidden; }

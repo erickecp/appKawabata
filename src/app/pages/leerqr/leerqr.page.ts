@@ -32,24 +32,18 @@ export class LeerqrPage implements OnInit {
 
 
   async leerQR(){
-    document.querySelector('body')!.classList.add('scanner-active');
+    BarcodeScanner.hideBackground();
+    document.body.classList.add("qrscanner");
     const fechformat = moment().format();
     const fecha = moment(fechformat, 'YYYY-MM-DD');
     const horaActual = moment();
     const horaExacta = horaActual.format('HH:mm');
-    console.log(horaExacta)
 
-    document.querySelector('body')!.classList!.add('scanner-active');
-    await BarcodeScanner.checkPermission({ force: true });
-    // make background of WebView transparent
-    // note: if you are using ionic this might not be enough, check below
-    BarcodeScanner.hideBackground();
-    const result = await BarcodeScanner.startScan(
-      { targetedFormats: [SupportedFormat.QR_CODE] }
-    ); // start scanning and wait for a result
+    const result = await BarcodeScanner.startScan();// start scanning and wait for a result
 
     // if the result has content
    if (result.hasContent) {
+    document.body.classList.remove("qrscanner");
     document.querySelector('body')?.classList?.remove('scanner-active');
     const datqr = JSON.parse(result.content);
     const formatDate = moment(datqr.fecha, 'YYYY-MM-DD');
