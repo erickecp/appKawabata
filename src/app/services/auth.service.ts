@@ -11,12 +11,13 @@ import { NavController } from '@ionic/angular';
 export class AuthService {
 
   URLAPI = environment.URLAPI;
-  user = {};
+  user: any = {};
+  token: any = '';
   constructor(
     private http: HttpClient,
     private navCtrl: NavController
   ) {
-    console.log(this.user)
+    this.cargarToken();
    }
 
   login(body: {userWeb: string , password: string}){
@@ -29,7 +30,7 @@ export class AuthService {
        if(resp.maestro){
         this.guardaUsuario(resp.maestro);
         }
-       // this.guardaToken(resp.token);
+        this.guardaToken(resp.token);
         if ( resp) {
           this.navCtrl.navigateRoot('/tabs/comunicados');
         } else {
@@ -40,9 +41,30 @@ export class AuthService {
     )
   }
 
+  guardaToken(token: string) {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+
+  validaToken(): boolean {
+    if(!!this.token && !!this.user){
+      return true;
+    }
+    return false
+  }
+
+
+
   guardaUsuario(user: any) {
     this.user = user;
     localStorage.setItem('user', JSON.stringify(user));
+    console
+  }
+
+  async cargarToken() {
+    this.token = await localStorage.getItem('token') || null;
+    this.user = JSON.parse(localStorage.getItem('user')|| '{}')|| null;
   }
 
   getUserId(){

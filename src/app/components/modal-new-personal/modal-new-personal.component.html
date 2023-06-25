@@ -25,7 +25,7 @@
 
     <ion-item lines="none" #itemPicture>
       <input  formControlName="fotoPerfil"  id="files" class="input-files"
-        (click)="changeProfile( $event )" accept="image/png, image/jpg, image/jpeg" />
+        (click)="changeProfile()" accept="image/png, image/jpg, image/jpeg" />
       <label for="files" class="label-files noSelect">
         Foto de perfil
       </label>
@@ -38,6 +38,7 @@
     <ion-item>
       <ion-input type="text" formControlName="direccion" placeholder="Dirección"></ion-input>
       <span *ngIf="validaControl('direccion')" slot="error"> La direccion es obligatoria</span>
+
     </ion-item>
     <ion-item>
       <ion-input type="text" formControlName="colonia" placeholder="Colonia"></ion-input>
@@ -50,6 +51,7 @@
     <ion-item>
       <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
       <span *ngIf="validaControl('email')" slot="error"> El email es obligatorio</span>
+      <span *ngIf="fomrPersonal.get('email')?.errors?.['pattern']" slot="error"> El email no es valido</span>
     </ion-item>
     <ion-item>
       <ion-input type="number" formControlName="telefono" placeholder="Teléfono"></ion-input>

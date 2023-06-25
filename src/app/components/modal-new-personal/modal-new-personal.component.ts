@@ -79,13 +79,12 @@ export class ModalNewPersonalComponent implements OnInit {
     }
 
 
-  changeProfile(event: any): void {
+  changeProfile(): void {
     this.compressImg.uploadFile().then(({image, orientation}) => {
       this.generarURL(image)
       const bl = this.dataURItoBlob(image);
       this.currentFile![0] = bl;
       });
-
   }
 
 
@@ -94,7 +93,7 @@ export class ModalNewPersonalComponent implements OnInit {
       colonia : ['', Validators.required],
       fotoPerfil: [''],
       nombre: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required,Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       direccion: ['', Validators.required],
       parentesco: ['', Validators.required],
       telefono: ['', Validators.required],
@@ -170,5 +169,6 @@ export class ModalNewPersonalComponent implements OnInit {
   validaControl(control: string){
     return !!this.fomrPersonal.get(control)!.errors && this.fomrPersonal.get(control)!.touched;
   }
+
 
 }

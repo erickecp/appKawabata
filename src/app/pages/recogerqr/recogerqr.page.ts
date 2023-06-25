@@ -145,13 +145,16 @@ export class RecogerqrPage implements OnInit {
       console.log(this.alumnosQR);
       this.allToLine(this.alumnosQR);
       this.qrCodeImage = url;
-      // console.log(this.qrCodeImage);
+     console.log(this.qrCodeImage);
     })
       }
     })
 
 
   }
+
+
+
 
 
   allToLine(arrayAlumnos: any[]){

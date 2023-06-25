@@ -17,31 +17,37 @@ export class LoginPage implements OnInit {
     private authS: AuthService,
     private alertS: AlertsService,
     private route: Router
-  ) { }
+  ) {
+
+   }
 
   ngOnInit() {
-    this.generateForm()
+    this.generateForm();
   }
 
 
   generateForm() {
     this.formLogin = this.fb.group({
-      userWeb: ['', Validators.required],
-      // userWeb: ['KW23003A', Validators.required],
-      //password: ['12345', Validators.required]
-      password: ['', Validators.required]
+      //userWeb: ['', Validators.required],
+       userWeb: ['KW23003A', Validators.required],
+      password: ['12345', Validators.required]
+     // password: ['', Validators.required]
     });
   }
 
 
   submit(){
     console.log(this.formLogin.value);
-    this.authS.login(this.formLogin.value).subscribe(
-      resp => {
-        console.log(resp)
-      }, (err: any) => {
-          this.alertS.generateToastError(err.error.message)
+    this.authS.login(this.formLogin.value).subscribe({
+      next: (res: any) => {
+        this.alertS.generateToastSuccess('Bienvenido');
+      },
+      error: (err: any) => {
+        this.alertS.generateToastError('Ocurrio un error'+ err.error.message)
       }
+    }
+          // this.alertS.generateToastError(err.error.message)
+
     );
     }
 }
