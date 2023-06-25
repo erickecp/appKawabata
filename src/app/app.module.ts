@@ -5,7 +5,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
