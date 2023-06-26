@@ -5,6 +5,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 import Swiper from 'swiper';
 import SwiperCore, { Autoplay } from 'swiper';
 import { AlertsService } from '../../services/alerts.service';
+import { SocketsService } from 'src/app/services/sockets.service';
+import { EVENTS } from 'src/app/enums/sockets.enum';
 SwiperCore.use([Autoplay]);
 @Component({
   selector: 'app-tab2',
@@ -18,11 +20,13 @@ export class Tab2Page implements AfterViewInit{
   constructor(
     private utilsS:UtilsService,
     private alertsS:AlertsService,
+    private socketS: SocketsService,
     private authS: AuthService,
     private navigate: Router,
   ) {
     this.user = this.authS.getTipoUser();
-    console.log(this.user);
+    this.socketS.listen(EVENTS.CONFIG_USER).subscribe(res => {
+    })
   }
 
 
@@ -32,7 +36,6 @@ export class Tab2Page implements AfterViewInit{
 
 
 recoger(){
-  console.log(this.user);
   if(this.user === 'MAESTRO'){
     this.navigate.navigateByUrl('tabs/tab1')
   } else if(this.user === 'LECTOR') {

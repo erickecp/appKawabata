@@ -29,9 +29,6 @@ export class LeerqrPage implements OnInit {
     BarcodeScanner.stopScan();
   }
 
-
-
-
   async leerQR(){
     const resultPermisos = await BarcodeScanner.checkPermission({
       force: true,
@@ -46,7 +43,7 @@ export class LeerqrPage implements OnInit {
     App.addListener('backButton', () => {
       this.detenerEscanner();
     });
-    
+
     BarcodeScanner.hideBackground();
 
     document.body.classList.add("qrscanner");
@@ -55,7 +52,6 @@ export class LeerqrPage implements OnInit {
     const fechformat = moment().format();
     const fecha = moment(fechformat, 'YYYY-MM-DD');
     const horaActual = moment();
-    const horaExacta = horaActual.format('HH:mm');
 
     const result = await BarcodeScanner.startScan({
       targetedFormats: [SupportedFormat.QR_CODE],
@@ -65,13 +61,53 @@ export class LeerqrPage implements OnInit {
 
     // if the result has content
    if (result.hasContent) {
+
     const datqr = JSON.parse(result.content);
-    const formatDate = moment(datqr.fecha, 'YYYY-MM-DD');
-    const hora1 = moment(datqr.hora, 'HH:mm');
-    const hora2 = moment(horaExacta, 'HH:mm');
+    const horaQRPOST = moment(datqr.hora, 'HH:mm').add(1, 'hours').toDate();
+   const dateQR = moment(datqr.fecha, 'YYYY-MM-DD');
+
+   // Verificar si hora1 es anterior a hora2
+    const esIgualFecha = fecha.isSame(dateQR);
+    const esHoraAnterior = horaActual.isBefore(horaQRPOST);
+    if(!esIgualFecha || !esHoraAnterior){
+     this.alerts.generateToastErrorQR('El QR ha expirado!')
+     return
+    }
+
+     this.info = datqr;
+     this.getAutorizado();
+   }
+
+
+  }
+
+
+  async leerQR2(){
+    const resultPermisos = await BarcodeScanner.checkPermission({
+      force: true,
+    });
+
+    const fechformat = moment().format();
+    const fecha = moment(fechformat, 'YYYY-MM-DD');
+    const horaActual = moment();
+
+    const result = await BarcodeScanner.startScan({
+    });// start scanning and wait for a result
+
+    // if the result has content
+   if (result.hasContent) {
+
+     const datqr = JSON.parse(result.content);
+     const horaQRPOST = moment(datqr.hora, 'HH:mm').add(1, 'hours').toDate();
+    const dateQR = moment(datqr.fecha, 'YYYY-MM-DD');
+
     // Verificar si hora1 es anterior a hora2
-    const esAnterior = hora1.isBefore(hora2);
-    const esIgual = fecha.isSame(formatDate);
+     const esIgualFecha = fecha.isSame(dateQR);
+     const esHoraAnterior = horaActual.isBefore(horaQRPOST);
+     if(!esIgualFecha || !esHoraAnterior){
+      this.alerts.generateToastErrorQR('El QR ha expirado!')
+      return
+     }
 
       this.info = datqr;
       this.getAutorizado();
@@ -91,7 +127,6 @@ export class LeerqrPage implements OnInit {
   async getAutorizado(){
     document.querySelector('body')!.classList.remove('scanner-active');
     this.authS.getInfoAuth(this.info.autorizado.id).subscribe(info => {
-      console.log(info);
       this.personaAuth = info;
     })
   }
@@ -109,10 +144,8 @@ export class LeerqrPage implements OnInit {
     estado: 1
   }
 
-  console.log(data);
 
   this.filaS.changeState(data).subscribe( (res: any) => {
-    console.log(res);
     if(res.length){
       this.alerts.generateToastSuccess('Notificacion enviada a SALON!');
       this.personaAuth = null;

@@ -8,6 +8,8 @@ import { FilaService } from 'src/app/services/fila.service';
 import { FileSaverService } from 'ngx-filesaver';
 import { filter, of } from 'rxjs';
 import * as moment from 'moment';
+import { SocketsService } from 'src/app/services/sockets.service';
+import { EVENTS, ROOMS } from 'src/app/enums/sockets.enum';
 @Component({
   selector: 'app-recogerqr',
   templateUrl: './recogerqr.page.html',
@@ -30,7 +32,7 @@ export class RecogerqrPage implements OnInit {
     private authS: AuthService,
     private personalS:PersonalAuthService,
     private filaS: FilaService,
-    private _FileSaverService: FileSaverService
+    private socketsS: SocketsService
   ) {
     /* this.student = this.utilsS.getInfo();
     console.log(this.student);
@@ -47,6 +49,14 @@ export class RecogerqrPage implements OnInit {
     this.getAleumnos();
     this.user = this.authS.getUser();
     this.obtenerAutorizados();
+    this.socketsS.listen(EVENTS.FILAS).subscribe((res: any) => {
+
+      const replace = this.alumnosFila.findIndex( f => String(f.studentIds)=== String(res[0].studentIds));
+        if(replace !== -1){
+          this.alumnosFila[replace] = res[0];
+        }
+      // this.alumnosFila = res
+    })
   }
 
   ngOnInit() {
@@ -73,8 +83,6 @@ export class RecogerqrPage implements OnInit {
     const horaActual = moment();
     const horaFutura = horaActual.add(5, 'minutes');
     this.hora = horaFutura.format('HH:mm');
-    console.log(this.hora);
-    console.log(this.fecha);
     let dataQR: any[] = [];
     let alumnos: any[] = [];
     this.alumnosQR.forEach((alumno: any, index: number) => {
@@ -122,7 +130,6 @@ export class RecogerqrPage implements OnInit {
 
   generateQRCode(){
 
-
     this.alertS.showMessageOkCancel(
       '¿Estas seguro de esta acción?',
       'Deseas recoger a estos alumnos?'
@@ -142,10 +149,8 @@ export class RecogerqrPage implements OnInit {
       if(err){
         return;
       }
-      console.log(this.alumnosQR);
       this.allToLine(this.alumnosQR);
       this.qrCodeImage = url;
-     console.log(this.qrCodeImage);
     })
       }
     })
@@ -171,12 +176,10 @@ export class RecogerqrPage implements OnInit {
 
       ids.push(n)
      }),
-     console.log(ids);
 
     this.filaS.postFila(ids).subscribe(
       (alumnFilas: any) => {
         if(alumnFilas.length){
-          console.log('Info', alumnFilas)
           this.alertS.generateToastSuccess(
             'Alumnos en fila'
           );
@@ -214,7 +217,6 @@ export class RecogerqrPage implements OnInit {
       this.filaS.getSyudentsFilaTutor(id).subscribe(
         (resp: any) => {
           this.alumnosFila = resp;
-          console.log('RESFILAS', this.alumnosFila)
       }
     )
   }

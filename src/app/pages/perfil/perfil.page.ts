@@ -5,6 +5,9 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { TutoresService } from 'src/app/services/tutores.service';
 import { AlertController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
+import { SocketsService } from 'src/app/services/sockets.service';
+import { EVENTS } from 'src/app/enums/sockets.enum';
+import { ROOMS } from '../../enums/sockets.enum';
 
 @Component({
   selector: 'app-perfil',
@@ -23,7 +26,8 @@ export class PerfilPage implements OnInit {
     private authS: AuthService,
     private tutoresS: TutoresService,
     private alertsS: AlertsService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private socketsS: SocketsService
   ) {
     this.idUsuario = this.authS.getUserId();
     this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
@@ -35,9 +39,15 @@ export class PerfilPage implements OnInit {
 
   logout(){
     this.authS.logout();
+
     this.alertsS.generateToastSuccess(
       'Nos vemos pronto'
     )
+      if(this.usuario.estudiantes.length){
+         this.socketsS.emit('leaveRoom', ROOMS.TUTOR);
+      } else {
+        this.socketsS.emit('leaveRoom', ROOMS.MAESTRO);
+      }
   }
 
   changeProfile(event: any): void {
@@ -48,14 +58,11 @@ export class PerfilPage implements OnInit {
 
         this.generarURL(image)
         const bl = this.dataURItoBlob(image);
-        console.log(bl);
         this.currentFile![0] = bl;
-        console.log(this.currentFile)
         if(this.currentFile){
           formData.append('fotoPerfil', this.currentFile[0]);
         }
         this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  (res: any) => {
-        console.log(res);
         this.authS.modifyPerfil(res.data.fotoPerfil);
         this.alertsS.generateToastSuccess('Foto de perfil Actualizada')
        } )

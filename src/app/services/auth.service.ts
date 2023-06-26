@@ -32,7 +32,7 @@ export class AuthService {
         }
         this.guardaToken(resp.token);
         if ( resp) {
-          this.navCtrl.navigateRoot('/tabs/comunicados');
+          this.navCtrl.navigateRoot('/tabs/tab2');
         } else {
           this.navCtrl.navigateRoot('/login');
         }
@@ -93,6 +93,10 @@ getImagePerfil(){
 } else {
   return false
 }
+}
+
+post(ruta:string,data:any){
+  return this.http.post(this.URLAPI+ruta,data)
 }
 
 getTipoUser(){

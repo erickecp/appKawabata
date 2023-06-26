@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalComunicadoComponent } from 'src/app/components/modal-comunicado/modal-comunicado.component';
+import { EVENTS } from 'src/app/enums/sockets.enum';
 import { ComunicadosService } from 'src/app/services/comunicados.service';
+import { SocketsService } from 'src/app/services/sockets.service';
 import { environment } from 'src/environments/environment';
 import SwiperCore, {SwiperOptions} from 'swiper';
 
@@ -14,8 +16,16 @@ export class ComunicadosPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private blogS: ComunicadosService
-  ) { }
+    private blogS: ComunicadosService,
+    private sockets:SocketsService
+  ) {
+
+    this.sockets.listen(EVENTS.CONFIG_USER).subscribe( res => {
+      console.log('RESPUESTA LOGIN SOCKETS', res);
+    })
+
+  }
+
   selectedFilter = '';
   imgUrl = environment.URLAPI;
   comunicados:any[] = [];
@@ -38,6 +48,8 @@ export class ComunicadosPage implements OnInit {
   onSwiper(swiper: any) {
     console.log(swiper);
   }
+
+
   onSlideChange() {
     console.log('slide change');
   }

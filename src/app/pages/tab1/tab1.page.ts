@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { FilaService } from 'src/app/services/fila.service';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { environment } from 'src/environments/environment';
+import { SocketsService } from 'src/app/services/sockets.service';
+import { EVENTS } from 'src/app/enums/sockets.enum';
 
 
 @Component({
@@ -32,7 +34,13 @@ export class Tab1Page {
     private utilsS:UtilsService,
     private filaS: FilaService,
     private navigate: Router,
+    private sockets: SocketsService
   ) {
+    this.sockets.listen(EVENTS.FILAS).subscribe( (res: any) => {
+      console.log('REPUESTA SOCKET',  res)
+      this.alumnosTutor = []
+      this.alumnosTutor  = res;
+    })
     this.getAleumnos();
   }
 

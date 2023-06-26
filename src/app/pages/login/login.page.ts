@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup , Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { EVENTS } from 'src/app/enums/sockets.enum';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { SocketsService } from 'src/app/services/sockets.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private authS: AuthService,
     private alertS: AlertsService,
-    private route: Router
+    private route: Router,
+    private soccketS: SocketsService
   ) {
 
    }
@@ -30,7 +33,7 @@ export class LoginPage implements OnInit {
     this.formLogin = this.fb.group({
       //userWeb: ['', Validators.required],
        userWeb: ['KW23003A', Validators.required],
-      password: ['12345', Validators.required]
+      password: ['9900', Validators.required]
      // password: ['', Validators.required]
     });
   }
@@ -41,6 +44,11 @@ export class LoginPage implements OnInit {
     this.authS.login(this.formLogin.value).subscribe({
       next: (res: any) => {
         this.alertS.generateToastSuccess('Bienvenido');
+        if(res.tutor){
+          this.soccketS.emit(EVENTS.CONFIG_USER, {id: res.tutor.id, type: 'tutor'});
+        }else {
+          this.soccketS.emit(EVENTS.CONFIG_USER, {id: res.maestro.id,  type: 'maestro'});
+        }
       },
       error: (err: any) => {
         this.alertS.generateToastError('Ocurrio un error'+ err.error.message)
