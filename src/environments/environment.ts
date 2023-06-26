@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   token:"70k3n",
   user:"v53r",
-  socket:"http://localhost:3001",
+  socket:"http://localhost:3006",
   URLAPI: 'http://localhost:3006/api',
   URLAPIIMG: 'http://localhost:3006/api/estudiante/file/',
 };
