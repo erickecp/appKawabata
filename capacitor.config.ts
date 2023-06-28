@@ -1,10 +1,15 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.colegiokawabata.www',
   appName: 'appKawabata',
   webDir: 'www',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
+  plugins: {
+    BarcodeScanner: {
+      appId: 'com.colegiokawabata.www',
+    }
+  }
 };
 
 export default config;
