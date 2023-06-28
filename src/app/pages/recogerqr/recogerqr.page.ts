@@ -9,7 +9,10 @@ import { FileSaverService } from 'ngx-filesaver';
 import { filter, of } from 'rxjs';
 import * as moment from 'moment';
 import { SocketsService } from 'src/app/services/sockets.service';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { EVENTS, ROOMS } from 'src/app/enums/sockets.enum';
+const IMAGE_DIR = 'stored-images';
+
 @Component({
   selector: 'app-recogerqr',
   templateUrl: './recogerqr.page.html',
@@ -66,6 +69,23 @@ export class RecogerqrPage implements OnInit {
 
   }
 
+
+  async descargarImagenBase64(nombreArchivo: string, imagenBase64: string): Promise<void> {
+    try {
+      // Guarda la imagen en el directorio de descargas del dispositivo
+      const result = await Filesystem.writeFile({
+        path: `images.jpeg`,
+        data: this.qrCodeImage,
+        directory: Directory.Documents,
+      });
+
+      console.log('Imagen descargada:', result.uri);
+    } catch (error) {
+      console.error('Error al descargar la imagen:', error);
+    }
+  }
+
+
   selectAlum(ev: any){
     const alumno = ev.detail.value;
     const existe = this.alumnosQR.find((al: any) => al.id === alumno.id);
@@ -101,7 +121,6 @@ export class RecogerqrPage implements OnInit {
   }
 
   obtenerAutorizados(){
-    this.autorizados = []
     this.personalS.getAll(this.userId).subscribe(
       (resp: any) => {
         const items$ = of(...resp);
@@ -111,19 +130,22 @@ export class RecogerqrPage implements OnInit {
           // Almacenar los items filtrados en el arreglo filteredItems
           this.autorizados.push(filteredItem);
         });
-        const newobj = { nombre: this.user.nombres, id: this.user.id}
-        this.autorizados.push(newobj);
       }
     )
   }
 
+  async imageDw(){
+    const writeSecretFile =
+      await Filesystem.writeFile({
+        path: `${IMAGE_DIR}/qr.jpg`,
+        data: this.qrCodeImage,
+        directory: Directory.Data,
+        encoding: Encoding.UTF8,
+      });
+      console.log(writeSecretFile);
 
-  imageDw(){
-    const link = document.createElement('a');
-    link.href = this.qrCodeImage ; // Reemplaza 'ruta_de_tu_imagen' por la URL o ruta de la imagen generada
-    link.download = 'nombre_imagen.png'; // Reemplaza 'nombre_imagen.png' por el nombre que deseas darle a la imagen descargada
-    link.click();
   }
+
 
 
 
@@ -151,6 +173,7 @@ export class RecogerqrPage implements OnInit {
       }
       this.allToLine(this.alumnosQR);
       this.qrCodeImage = url;
+      console.log(this.qrCodeImage);
     })
       }
     })
@@ -179,6 +202,7 @@ export class RecogerqrPage implements OnInit {
 
     this.filaS.postFila(ids).subscribe(
       (alumnFilas: any) => {
+        console.log(alumnFilas)
         if(alumnFilas.length){
           this.alertS.generateToastSuccess(
             'Alumnos en fila'

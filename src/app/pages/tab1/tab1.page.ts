@@ -38,8 +38,6 @@ export class Tab1Page {
   ) {
     this.sockets.listen(EVENTS.FILAS).subscribe( (res: any) => {
       console.log('REPUESTA SOCKET',  res)
-      this.alumnosTutor = []
-      this.alumnosTutor  = res;
     })
     this.getAleumnos();
   }

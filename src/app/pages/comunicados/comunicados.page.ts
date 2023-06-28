@@ -27,7 +27,7 @@ export class ComunicadosPage implements OnInit {
   }
 
   selectedFilter = '';
-  imgUrl = environment.URLAPI;
+  imgUrl = environment.URLAPIIMG;
   comunicados:any[] = [];
   comunicadosFilter: any[] = [];
   arrayNivelAlum: string[] = [];

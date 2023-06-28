@@ -26,6 +26,10 @@ export class Tab2Page implements AfterViewInit{
   ) {
     this.user = this.authS.getTipoUser();
     this.socketS.listen(EVENTS.CONFIG_USER).subscribe(res => {
+      console.log(res);
+    })
+    this.socketS.listen(EVENTS.FILAS).subscribe(res => {
+      console.log('REPUESTA SOCKET', res)
     })
   }
 

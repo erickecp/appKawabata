@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
+import { BarcodeScanner, SupportedFormat , } from '@capacitor-community/barcode-scanner';
 import { PersonalAuthService } from '../../services/personal-auth.service';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { FilaService } from '../../services/fila.service';
@@ -30,11 +30,14 @@ export class LeerqrPage implements OnInit {
   }
 
   async leerQR(){
-    const resultPermisos = await BarcodeScanner.checkPermission({
+    const resultPermisos = await BarcodeScanner.checkPermission
+    ({
       force: true,
     });
 
-    if (!resultPermisos.granted) {
+    console.log(resultPermisos);
+
+    if (resultPermisos.denied) {
       console.log('No hay permisos');
       return;
     }
