@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -7,36 +7,47 @@ import SwiperCore, { Autoplay } from 'swiper';
 import { AlertsService } from '../../services/alerts.service';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { EVENTS } from 'src/app/enums/sockets.enum';
+import { Platform } from '@ionic/angular';
+import { PushNotificationConfig } from 'src/app/tools/push-notification-configuration';
 SwiperCore.use([Autoplay]);
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements AfterViewInit{
+export class Tab2Page implements OnInit {
   @ViewChild('swiper')
   swiperRef: Swiper | undefined;
   user: any;
   constructor(
-    private utilsS:UtilsService,
+    private platform: Platform,
     private alertsS:AlertsService,
     private socketS: SocketsService,
     private authS: AuthService,
+    private pushNotification: PushNotificationConfig,
     private navigate: Router,
   ) {
     this.user = this.authS.getTipoUser();
     this.socketS.listen(EVENTS.CONFIG_USER).subscribe(res => {
       console.log(res);
-    })
+    });
+
+
     this.socketS.listen(EVENTS.FILAS).subscribe(res => {
       console.log('REPUESTA SOCKET', res)
-    })
+    });
   }
 
+  ngOnInit(): void {
 
-
-  ngAfterViewInit() {
-}
+    if (
+      this.platform.is('android') ||
+      this.platform.is('ios') ||
+      this.platform.is('ipad')
+    ) {
+      this.pushNotification.init();
+    }
+  }
 
 
 recoger(){

@@ -68,24 +68,23 @@ export class RecogerqrPage implements OnInit {
   asignAuth(ev: any) {}
 
   async descargarImagenBase64(
-    nombreArchivo: string,
-    imagenBase64: string
   ): Promise<void> {
     try {
       // Guarda la imagen en el directorio de descargas del dispositivo
+      const fecha = moment().format('DD-MM-YYYY');
+      const numeroAleatorio = Math.floor(Math.random() * 1000);
       const result = await Filesystem.writeFile({
-        path: `images.jpeg`,
+        path: `${fecha}${numeroAleatorio}QR.jpeg`,
         data: this.qrCodeImage,
         directory: Directory.Documents,
       });
-
+      this.alertS.generateToastSuccess('Imagen de QR descargada');
       Browser.open({
         url: result.uri,
       });
 
-      console.log('Imagen descargada:', result.uri);
     } catch (error) {
-      console.error('Error al descargar la imagen:', error);
+      this.alertS.generateToastError('Error: ' + error);
     }
   }
 
