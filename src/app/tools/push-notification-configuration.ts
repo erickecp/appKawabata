@@ -37,12 +37,13 @@ export class PushNotificationConfig {
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration', (token: Token) => {
       console.log(token);
-
+        //! Realizar el cambio por el id
       if (!localStorage.getItem('M081l3')) {
+        const user: any = localStorage.getItem('user');
         this.genericS
           .post(
             'user/mobile-token/' +
-              localStorage.getItem('user'),
+              user.id,
             token.value
           )
           .subscribe();
