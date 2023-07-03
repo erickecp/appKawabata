@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "854301366162",
+    "project_id": "kawabata-1fa71",
+    "storage_bucket": "kawabata-1fa71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854301366162:android:22d6ad85a74279e420d34b",
+        "android_client_info": {
+          "package_name": "com.clikgraphics.kawabata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854301366162-d35srnqnq7i9f002v8gn48kcdqa0doj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ4Qc2iThOWDbyAIDfU-38rQgF0IceO1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854301366162-d35srnqnq7i9f002v8gn48kcdqa0doj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854301366162:android:37f8a763dd8f4d5720d34b",
+        "android_client_info": {
+          "package_name": "com.colegiokawabata.www"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854301366162-d35srnqnq7i9f002v8gn48kcdqa0doj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ4Qc2iThOWDbyAIDfU-38rQgF0IceO1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854301366162-d35srnqnq7i9f002v8gn48kcdqa0doj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

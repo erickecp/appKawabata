@@ -26,7 +26,7 @@ export class PushNotificationConfig {
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting
     PushNotifications.requestPermissions().then((result: any) => {
-      if (result.state === 'granted') {
+      if (result.receive === 'granted') {
         // Register with Apple / Google to receive push via APNS/FCM
         PushNotifications.register();
       } else {
@@ -37,9 +37,9 @@ export class PushNotificationConfig {
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration', (token: Token) => {
       console.log(token);
+      const user: any = JSON.parse(localStorage.getItem('user') || '{}');
         //! Realizar el cambio por el id
-      if (!localStorage.getItem('M081l3')) {
-        const user: any = localStorage.getItem('user');
+      if (!localStorage.getItem('M081l3')) {  
         this.genericS
           .post(
             'user/mobile-token/' +
@@ -60,6 +60,7 @@ export class PushNotificationConfig {
     PushNotifications.addListener(
       'pushNotificationReceived',
       async (notification: PushNotificationSchema) => {
+        console.log('Push received: ', notification);
         const toast = await this.toast.create({
           color: 'dark',
           message: notification.title,
