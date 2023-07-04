@@ -38,14 +38,12 @@ export class PushNotificationConfig {
     PushNotifications.addListener('registration', (token: Token) => {
       console.log(token);
       const user: any = JSON.parse(localStorage.getItem('user') || '{}');
-        //! Realizar el cambio por el id
-      if (!localStorage.getItem('M081l3')) {  
+      //! Realizar el cambio por el id
+      if (!localStorage.getItem('M081l3')) {
         this.genericS
-          .post(
-            'user/mobile-token/' +
-              user.id,
-            token.value
-          )
+          .patch('/maestros/' + user.id + '/mobiltoken', {
+            token: token.value,
+          })
           .subscribe();
       }
       localStorage.setItem('M081l3', token.value);
