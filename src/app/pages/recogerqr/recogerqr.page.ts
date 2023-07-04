@@ -43,7 +43,7 @@ export class RecogerqrPage implements OnInit {
       this.generateQRCode(this.student.nombres, this.student.apellidos);
     } */
 
-    this.personalS.getActPer.subscribe((data) => {
+    this.personalS.getNewPer.subscribe((data) => {
       if (data) {
         this.obtenerAutorizados();
       }
@@ -67,8 +67,7 @@ export class RecogerqrPage implements OnInit {
 
   asignAuth(ev: any) {}
 
-  async descargarImagenBase64(
-  ): Promise<void> {
+  async descargarImagenBase64(): Promise<void> {
     try {
       // Guarda la imagen en el directorio de descargas del dispositivo
       const fecha = moment().format('DD-MM-YYYY');
@@ -78,11 +77,14 @@ export class RecogerqrPage implements OnInit {
         data: this.qrCodeImage,
         directory: Directory.Documents,
       });
-      this.alertS.generateToastSuccess('Imagen de QR descargada');
+
+      console.log('Imagen guardada en: ', result.uri);
+
+      await this.alertS.generateToastSuccess('Imagen de QR descargada');
+
       Browser.open({
         url: result.uri,
       });
-
     } catch (error) {
       this.alertS.generateToastError('Error: ' + error);
     }

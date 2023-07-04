@@ -41,7 +41,7 @@ export class PushNotificationConfig {
       //! Realizar el cambio por el id
       if (!localStorage.getItem('M081l3')) {
         this.genericS
-          .patch('/maestros/' + user.id + '/mobiltoken', {
+          .patch('/maestros/' + user.id + '/mobiletoken', {
             token: token.value,
           })
           .subscribe();
