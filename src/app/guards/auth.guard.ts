@@ -14,12 +14,15 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
-      const resp = localStorage.getItem('token') || null;
-      console.log(resp);
+      const resp = this.auth.getToken()
+
       if(resp) {
-        this.router.navigateByUrl('tabs/tab2');
+        console.log('hay token', resp)
+        this.router.navigate(['/tabs/tab2']);
+      }else {
+        console.log('no hay token', resp)
       }
-      return true
+    return true;
   }
 
 }

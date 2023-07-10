@@ -49,6 +49,7 @@ export class AuthService {
 
   validaToken(): boolean {
     if(!!this.token && !!this.user){
+      console.log('VALID');
       return true;
     }
     return false
@@ -92,6 +93,17 @@ getImagePerfil(){
   return user.fotoPerfilOk;
 } else {
   return true;
+}
+}
+
+getToken(){
+  const token = localStorage.getItem('token') || null;
+  console.log(token);
+  if(token !== null){
+    return true;
+  }
+  else {
+  return false;
 }
 }
 

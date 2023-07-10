@@ -61,6 +61,12 @@ export class PerfilPage implements OnInit {
   }
 
   changeProfile(event: any): void {
+    console.log(this.usuario);
+    if(this.usuario.responsabilidad) {
+      this.alertsS.generateToastSuccess('Tu foto debe ser cambiada desde el administrador')
+      return ;
+    }
+
     this.alertsS.Image().then((res: any) => {
       if(res.data === true){
         const formData = new FormData();
@@ -71,7 +77,7 @@ export class PerfilPage implements OnInit {
         this.currentFile![0] = bl;
         if(this.currentFile){
           formData.append('fotoPerfil', this.currentFile[0]);
-          formData.append('correo',JSON.stringify( this.usuario.email) )
+          formData.append('email',JSON.stringify( this.usuario.email) )
           formData.append('nombres', JSON.stringify( this.usuario.nombres))
         }
         this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  (res: any) => {
@@ -80,6 +86,7 @@ export class PerfilPage implements OnInit {
        } )
     });
       }});
+
 
 
   }
