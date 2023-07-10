@@ -143,6 +143,9 @@ getColor(estado: string){
 
 
 getImage(name: string){
+  if(name === null || name === undefined){
+    return './assets/descarga.png'
+  }
   return `${this.urlImg}${name}`;
 // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
 }

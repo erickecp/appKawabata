@@ -34,13 +34,15 @@ export class PerfilPage implements OnInit {
     this.idUsuario = this.authS.getUserId();
     this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
     this.socketsS.listen(EVENTS.FILAS).subscribe( (res: any) => {
-      console.log('REPUESTA SOCKET PERFIL',  res)
       const user = this.authS.getUser();
-      console.log('USER', user);
       user.fotoPerfilOk = res.fotoPerfilOk;
       user.fotoPerfil = res.fotoPerfil;
-      localStorage.setItem('user',  JSON.stringify(user));
-      this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
+      if(!user.responsabilidad && !typeof(res)){
+
+         localStorage.setItem('user',  JSON.stringify(user));
+         this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
+      }
+
       this.router.navigateByUrl('/tabs/perfil');
 
     })
@@ -55,11 +57,7 @@ export class PerfilPage implements OnInit {
     this.alertsS.generateToastSuccess(
       'Nos vemos pronto'
     )
-      if(this.usuario.estudiantes.length){
-         this.socketsS.emit('leaveRoom', ROOMS.TUTOR);
-      } else {
-        this.socketsS.emit('leaveRoom', ROOMS.MAESTRO);
-      }
+
   }
 
   changeProfile(event: any): void {
@@ -73,6 +71,8 @@ export class PerfilPage implements OnInit {
         this.currentFile![0] = bl;
         if(this.currentFile){
           formData.append('fotoPerfil', this.currentFile[0]);
+          formData.append('correo',JSON.stringify( this.usuario.email) )
+          formData.append('nombres', JSON.stringify( this.usuario.nombres))
         }
         this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  (res: any) => {
         this.authS.modifyPerfil(res.data.fotoPerfil);

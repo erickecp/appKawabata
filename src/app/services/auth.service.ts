@@ -58,8 +58,9 @@ export class AuthService {
 
   guardaUsuario(user: any) {
     this.user = user;
+    console.log('USUARIO MAESTROOOO', user)
     localStorage.setItem('user', JSON.stringify(user));
-    console
+
   }
 
   async cargarToken() {
@@ -87,9 +88,10 @@ getUser(){
 
 getImagePerfil(){
   const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
- if (user.fotoPerfil) {
-  console.log('user', user.fotoPerfilOk);
+ if (user.fotoPerfil && !user.responsabilidad) {
   return user.fotoPerfilOk;
+} else {
+  return true;
 }
 }
 
@@ -128,9 +130,12 @@ logout(){
 
 modifyPerfil(img: any) {
   const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
-
+  if(!user.responsabilidad){
   const newUser = { ...user, fotoPerfil : img };
+  console.log(newUser);
   localStorage.setItem('user', JSON.stringify(newUser));
+}
+
 }
 
 }
