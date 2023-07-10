@@ -42,11 +42,20 @@ export class PushNotificationConfig {
       if (!localStorage.getItem('M081l3')) {
         const user: any = localStorage.getItem('user');
         console.log(user);
-        this.genericS
+        if(!user.responsabilidad){
+          this.genericS
+          .patch('/tutores/' + user.id + '/mobiletoken', {
+            token: token.value,
+          })
+          .subscribe();
+        } else {
+          this.genericS
           .patch('/maestros/' + user.id + '/mobiletoken', {
             token: token.value,
           })
           .subscribe();
+        }
+
       }
       localStorage.setItem('M081l3', token.value);
     });
