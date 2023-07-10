@@ -40,7 +40,6 @@ export class PushNotificationConfig {
       const user: any = JSON.parse(localStorage.getItem('user') || '{}');
       //! Realizar el cambio por el id
       if (!localStorage.getItem('M081l3')) {
-        const user: any = localStorage.getItem('user');
         console.log(user);
         if(!user.responsabilidad){
           this.genericS
