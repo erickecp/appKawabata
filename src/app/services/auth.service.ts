@@ -87,11 +87,9 @@ getUser(){
 
 getImagePerfil(){
   const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
- if (user.fotoPerfil !== null) {
-  console.log('user', user.fotoPerfil);
-  return true;
-} else {
-  return false
+ if (user.fotoPerfil) {
+  console.log('user', user.fotoPerfilOk);
+  return user.fotoPerfilOk;
 }
 }
 

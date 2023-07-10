@@ -30,10 +30,10 @@
   </ion-item>
 
   <ion-item color="danger" *ngIf="usuario.fotoPerfil === null" class="ion-text-center animate__bounce">
-    <ion-label > Sube una foto de Perfil </ion-label>
+    <ion-label > Sube una foto de Perfil:  {{usuario.fotoPerfil}} </ion-label>
   </ion-item>
-  <ion-item color="danger" *ngIf="usuario.fotoPerfil === null && !usuario.fotoPerfilOk" class="ion-text-center animate__bounce">
-    <ion-label > Tu fotografia fue rechazada </ion-label>
+  <ion-item color="danger" *ngIf="usuario.fotoPerfil && !usuario.fotoPerfilOk" class="ion-text-center animate__bounce">
+    <ion-label > Tu fotografia no ha sido aprobada </ion-label>
   </ion-item>
 
   <ion-list>

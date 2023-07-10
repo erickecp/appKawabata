@@ -102,7 +102,7 @@ export class Tab3Page {
     const modal = await this.modalController.create({
       component: ModalNewPersonalComponent,
       mode: 'ios',
-      initialBreakpoint: 0.7,
+      initialBreakpoint: 0.8,
       cssClass: 'email-component',
       componentProps: {
         user: auth

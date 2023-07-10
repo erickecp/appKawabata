@@ -53,11 +53,8 @@ export class RecogerqrPage implements OnInit {
     this.user = this.authS.getUser();
     this.obtenerAutorizados();
     this.socketsS.listen(EVENTS.FILAS).subscribe((res: any) => {
-      const replace = this.alumnosFila.findIndex(
-        (f) => String(f.studentIds) === String(res[0].studentIds)
-      );
-      if (replace !== -1) {
-        this.alumnosFila[replace] = res[0];
+      if(res){
+        this.getAleumnos();
       }
       // this.alumnosFila = res
     });
@@ -208,6 +205,7 @@ export class RecogerqrPage implements OnInit {
   }
 
   getAleumnos() {
+    this.alumnosTutor = [];
     this.userId = this.authS.getUserId();
     this.getAlumnosFila(this.userId);
     this.personalS.getAlumnos(this.userId).subscribe((resp: any) => {

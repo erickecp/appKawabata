@@ -8,7 +8,10 @@ export const environment = {
   user:"v53r",
   socket:"http://localhost:3006",
   URLAPI: 'http://localhost:3006/api',
-  URLAPIIMG: 'http://localhost:3006/api/estudiante/file/',
+   URLAPIIMG: 'http://localhost:3006/api/estudiante/file/',
+  //socket:"https://api.colegiokawabata.com/",
+  //URLAPI: 'https://api.colegiokawabata.com/api',
+  //URLAPIIMG: 'https://api.colegiokawabata.com/api/estudiante/file/',
 };
 
 /*

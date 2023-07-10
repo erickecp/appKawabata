@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { EVENTS } from 'src/app/enums/sockets.enum';
 import { ROOMS } from '../../enums/sockets.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -26,12 +27,23 @@ export class PerfilPage implements OnInit {
     private authS: AuthService,
     private tutoresS: TutoresService,
     private alertsS: AlertsService,
-    private alertCtrl: AlertController,
-    private socketsS: SocketsService
+    private router: Router,
+    private socketsS: SocketsService,
+
   ) {
     this.idUsuario = this.authS.getUserId();
     this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
-    console.log(this.usuario);
+    this.socketsS.listen(EVENTS.FILAS).subscribe( (res: any) => {
+      console.log('REPUESTA SOCKET PERFIL',  res)
+      const user = this.authS.getUser();
+      console.log('USER', user);
+      user.fotoPerfilOk = res.fotoPerfilOk;
+      user.fotoPerfil = res.fotoPerfil;
+      localStorage.setItem('user',  JSON.stringify(user));
+      this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
+      this.router.navigateByUrl('/tabs/perfil');
+
+    })
   }
 
   ngOnInit() {
@@ -72,9 +84,6 @@ export class PerfilPage implements OnInit {
 
   }
 
-
-
-
   dataURItoBlob(dataURI:any) {
     // convert base64 to raw binary data held in a string
     // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
@@ -108,7 +117,6 @@ export class PerfilPage implements OnInit {
     }
 
     getImage(name: string){
-
       return `${this.imgUrl}${name}`;
    // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
    }
