@@ -89,9 +89,12 @@ getUser(){
 
 getImagePerfil(){
   const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
- if (user.fotoPerfil && !user.responsabilidad) {
+ if (user.fotoPerfil === null && user.responsabilidad === undefined) {
   return user.fotoPerfilOk;
-} else {
+} else if(user.fotoPerfil && user.responsabilidad === undefined) {
+  return user.fotoPerfilOk;
+}else {
+  console.log('no user');
   return true;
 }
 }
