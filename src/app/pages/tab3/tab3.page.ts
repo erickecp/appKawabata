@@ -47,7 +47,7 @@ export class Tab3Page {
     this.personalS.getAll(this.idUser).subscribe(
       (resp: any) => {
         console.log(resp);
-        this.autorizados = resp;
+        this.autorizados =  resp.filter( (user: any) => user.email !== JSON.parse( localStorage.getItem('user') || '{}').email );
       }
     )
 

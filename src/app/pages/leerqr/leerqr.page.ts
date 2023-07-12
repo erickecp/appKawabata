@@ -88,7 +88,7 @@ export class LeerqrPage implements OnInit {
     // if the result has content
     if (result.hasContent) {
       const datqr = JSON.parse(result.content);
-      const horaQRPOST = moment(datqr.hora, 'HH:mm').add(1, 'hours').toDate();
+      const horaQRPOST = moment(datqr.hora, 'HH:mm').add(5, 'hours').toDate();
       const dateQR = moment(datqr.fecha, 'YYYY-MM-DD');
 
       // Verificar si hora1 es anterior a hora2

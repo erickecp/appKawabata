@@ -3,11 +3,9 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { TutoresService } from 'src/app/services/tutores.service';
-import { AlertController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { EVENTS } from 'src/app/enums/sockets.enum';
-import { ROOMS } from '../../enums/sockets.enum';
 import { Router } from '@angular/router';
 
 @Component({
