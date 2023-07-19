@@ -37,7 +37,6 @@ export class Tab1Page {
     private sockets: SocketsService
   ) {
     this.sockets.listen(EVENTS.FILAS).subscribe( (res: any) => {
-      console.log('REPUESTA SOCKET',  res)
       this.getAleumnos();
     })
     this.getAleumnos();
@@ -68,7 +67,6 @@ enviaraFila(alumno: any){
   console.log(data);
 
   this.filaS.changeState(data).subscribe( (res: any) => {
-    console.log(res);
     if(res.length){
       this.alerts.generateToastSuccess(msn);
       this.getAleumnos();
@@ -87,8 +85,6 @@ getAleumnos(){
   const tipouser = this.authS.getTipoUser();
   this.userId = this.authS.getUserId();
   this.user = this.authS.getUser();
-  console.log(this.userId);
-  console.log(tipouser);
   if(tipouser === 'FILA'){
     this.filaS.alumnosfila().subscribe(
       (resp: any) => {
@@ -99,7 +95,6 @@ getAleumnos(){
   }else if(tipouser === 'ENTREGAR'){
     this.filaS.alumnosfila3().subscribe(
       (resp: any) => {
-        console.log(resp);
          this.alumnosTutor = resp;
       }
     )
@@ -107,7 +102,6 @@ getAleumnos(){
     console.log(this.userId)
   this.filaS.getSyudentsFila(this.user.grupoAsignado, this.userId).subscribe(
     (resp: any) => {
-      console.log(resp);
        this.alumnosTutor = resp;
     }
   )

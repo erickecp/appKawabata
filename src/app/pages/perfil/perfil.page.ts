@@ -32,7 +32,6 @@ export class PerfilPage implements OnInit {
     this.idUsuario = this.authS.getUserId();
     this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
     this.socketsS.listen(EVENTS.FILAS).subscribe( (res: any) => {
-      console.log('listening SOCKET', res)
       const user = this.authS.getUser();
       user.fotoPerfilOk = res.fotoPerfilOk;
       user.fotoPerfil = res.fotoPerfil;
@@ -40,9 +39,11 @@ export class PerfilPage implements OnInit {
 
          localStorage.setItem('user',  JSON.stringify(user));
          this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
+         this.router.navigateByUrl('/tabs/perfil');
+      } else {
+
       }
 
-      this.router.navigateByUrl('/tabs/perfil');
 
     })
   }
