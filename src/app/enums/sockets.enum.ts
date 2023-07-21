@@ -17,6 +17,7 @@ export enum EVENTS {
   OFFLINE = "offline_event",
   CONNECT = "connect_event",
   FILAS = "filas_event",
+  PERFIL = "perfil_event",
   CONFIG_USER = "config_user_event",
   UBICATION = "ubication_event",
   BRANCH = "branch_event"

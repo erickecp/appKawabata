@@ -31,12 +31,11 @@ export class PerfilPage implements OnInit {
   ) {
     this.idUsuario = this.authS.getUserId();
     this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
-    this.socketsS.listen(EVENTS.FILAS).subscribe( (res: any) => {
+    this.socketsS.listen(EVENTS.PERFIL).subscribe( (res: any) => {
       const user = this.authS.getUser();
       user.fotoPerfilOk = res.fotoPerfilOk;
       user.fotoPerfil = res.fotoPerfil;
       if(!user.responsabilidad && typeof(res) !== 'string' ){
-
          localStorage.setItem('user',  JSON.stringify(user));
          this.usuario = JSON.parse(localStorage.getItem('user') || '{}')
          this.router.navigateByUrl('/tabs/perfil');
