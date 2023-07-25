@@ -40,7 +40,6 @@ export class LoginPage implements OnInit {
 
 
   submit(){
-    console.log(this.formLogin.value);
     this.authS.login(this.formLogin.value).subscribe({
       next: (res: any) => {
         this.alertS.generateToastSuccess('Bienvenido');

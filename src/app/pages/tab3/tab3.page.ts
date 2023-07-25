@@ -34,7 +34,6 @@ export class Tab3Page {
 
     this.personalS.getUpdPer.subscribe(
       (data) => {
-        console.log(data);
         const replace = this.autorizados.findIndex( f => f.id === data.id);
         if(replace !== -1){
           this.autorizados[replace] = data;
@@ -46,7 +45,6 @@ export class Tab3Page {
     this.idUser = user.id;
     this.personalS.getAll(this.idUser).subscribe(
       (resp: any) => {
-        console.log(resp);
         this.autorizados =  resp.filter( (user: any) => user.email !== JSON.parse( localStorage.getItem('user') || '{}').email );
       }
     )
@@ -59,7 +57,6 @@ export class Tab3Page {
       'Deseas eliminar a esta persona?'
     ).then((res: any) => {
       if(res.data === true){
-          console.log('Vamos a eliminar');
           this.personalS.deletePersonal(id).subscribe( res => {
             if(res){
               this.alertS.generateToastSuccess('Eliminado correctamente');
@@ -87,9 +84,7 @@ export class Tab3Page {
   }
 
   activar(id: any, active: boolean) {
-    console.log('activar', active );
     this.personalS.activar(id, { active: active }).subscribe( res => {
-      console.log('active', res);
       if(res){
         this.alertS.generateToastSuccess( active ? 'Activo' : 'Inactivo' );
         this.personalS.setACTIVEPER(id);

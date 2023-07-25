@@ -57,14 +57,12 @@ enviaraFila(alumno: any){
 
  }
  alumnosFila.push(alumno.student);
- console.log(alumnosFila);
   const data = {
     alumnos : alumnosFila,
     autorizado: alumno.auth,
     estado: alumno.estado + 1
   };
 
-  console.log(data);
 
   this.filaS.changeState(data).subscribe( (res: any) => {
     if(res.length){
@@ -88,7 +86,6 @@ getAleumnos(){
   if(tipouser === 'FILA'){
     this.filaS.alumnosfila().subscribe(
       (resp: any) => {
-        console.log(resp);
          this.alumnosTutor = resp;
       }
     )
@@ -99,7 +96,6 @@ getAleumnos(){
       }
     )
   } else {
-    console.log(this.userId)
   this.filaS.getSyudentsFila(this.user.grupoAsignado, this.userId).subscribe(
     (resp: any) => {
        this.alumnosTutor = resp;

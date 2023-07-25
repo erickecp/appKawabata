@@ -61,7 +61,6 @@ export class LeerqrPage implements OnInit {
 
       await alert.present();
 
-      console.log('No hay permisos');
       return;
     }
 

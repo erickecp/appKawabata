@@ -40,25 +40,25 @@
     <ion-item >
       <ion-label>
         <h3>Nombre:</h3>
-        <h6>{{usuario.nombres + '' + usuario.apellidos}}</h6>
+        <h6>{{usuario.nombres + ' ' + usuario.apellidos}}</h6>
       </ion-label>
     </ion-item>
     <ion-item >
       <ion-label>
         <h3>Email:</h3>
-        <h6>{{usuario.email }}</h6>
+        <h6>{{usuario.email ? usuario.email : usuario.correo }}</h6>
       </ion-label>
     </ion-item>
     <ion-item >
       <ion-label>
         <h3>Telefono:</h3>
-        <h6>{{usuario.telefono}}</h6>
+        <h6>{{ usuario.telefono }}</h6>
       </ion-label>
     </ion-item>
     <ion-item >
       <ion-label>
-        <h3>Nombre:</h3>
-        <h6>{{usuario.telefonoCelular}}</h6>
+        <h3>Celular:</h3>
+        <h6>{{usuario.telefonoCelular ?  usuario.telefonoCelular : usuario.celular}}</h6>
       </ion-label>
     </ion-item>
   </ion-list>

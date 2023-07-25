@@ -31,11 +31,6 @@ export class Tab2Page implements OnInit {
     this.socketS.listen(EVENTS.CONFIG_USER).subscribe(res => {
       console.log(res);
     });
-
-
-    this.socketS.listen(EVENTS.FILAS).subscribe(res => {
-      console.log('REPUESTA SOCKET', res)
-    });
   }
 
   ngOnInit(): void {

@@ -12,7 +12,6 @@ export class TabsPage {
     private authS: AuthService
   ) {
     this.user = this.authS.getTipoUser();
-    console.log(this.user);
   }
 
 }

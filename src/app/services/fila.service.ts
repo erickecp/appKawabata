@@ -14,7 +14,6 @@ export class FilaService {
   ) { }
 
   postFila(alumnos: any[]){
-    console.log(alumnos);
     return this.http.post(`${this.URLAPI}/filas/alltoline`, alumnos);
   }
 
@@ -32,7 +31,6 @@ export class FilaService {
   }
 
   changeState(data: any) {
-    console.log('change state desde el service')
     return this.http.patch(`${this.URLAPI}/filas/changeState`, data);
   }
 

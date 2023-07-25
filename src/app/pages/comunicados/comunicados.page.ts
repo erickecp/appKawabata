@@ -21,7 +21,6 @@ export class ComunicadosPage implements OnInit {
   ) {
 
     this.sockets.listen(EVENTS.CONFIG_USER).subscribe( res => {
-      console.log('RESPUESTA LOGIN SOCKETS', res);
     })
 
   }
@@ -51,26 +50,22 @@ export class ComunicadosPage implements OnInit {
 
 
   onSlideChange() {
-    console.log('slide change');
   }
 
 
   genArray(user:any) {
-    console.log(user);
 
     for( let stu of user.estudiantes){
       if(!this.arrayNivelAlum.includes(stu.nivel)){
         this.arrayNivelAlum.push(stu.nivel)
       }
     }
-    console.log('array', this.arrayNivelAlum);
 
     return this.arrayNivelAlum;
   }
 
 
   async openModalComunicado(infoCom: any) {
-    console.log(infoCom);
     const modal = await this.modalController.create({
       component: ModalComunicadoComponent,
       mode: 'ios',
@@ -115,8 +110,6 @@ export class ComunicadosPage implements OnInit {
       } else {
         dep = this.genArray(JSON.parse(user))
       }
-      console.log(userJ);
-
       this.getBlogs(dep);
 
     }
@@ -125,7 +118,6 @@ export class ComunicadosPage implements OnInit {
   getBlogs(dep: any){
     this.blogS.getComunicados(dep).subscribe(
         (resp: any) => {
-          console.log(resp);
           this.comunicados = resp;
           this.comunicadosFilter = resp;
         }

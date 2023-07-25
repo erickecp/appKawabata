@@ -74,8 +74,7 @@ export class ModalNewPersonalComponent implements OnInit {
       for (var i = 0; i < byteString.length; i++) {
           ia[i] = byteString.charCodeAt(i);
       }
-      return new Blob([ab], {type: mimeString})
-
+      return new Blob([ab], {type: mimeString});
     }
 
 
@@ -122,7 +121,6 @@ export class ModalNewPersonalComponent implements OnInit {
     }
 
     console.log(formData);
-
 
     if(this.currentFile){
       formData.append('fotoPerfil', this.currentFile[0]);

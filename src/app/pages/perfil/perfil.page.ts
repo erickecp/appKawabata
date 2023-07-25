@@ -60,7 +60,6 @@ export class PerfilPage implements OnInit {
   }
 
   changeProfile(event: any): void {
-    console.log(this.usuario);
     if(this.usuario.responsabilidad) {
       this.alertsS.generateToastSuccess('Tu foto debe ser cambiada desde el administrador')
       return ;

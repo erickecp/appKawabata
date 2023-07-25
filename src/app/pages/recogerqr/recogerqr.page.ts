@@ -37,12 +37,6 @@ export class RecogerqrPage implements OnInit {
     private filaS: FilaService,
     private socketsS: SocketsService
   ) {
-    /* this.student = this.utilsS.getInfo();
-    console.log(this.student);
-    if(this.student){
-      this.generateQRCode(this.student.nombres, this.student.apellidos);
-    } */
-
     this.personalS.getNewPer.subscribe((data) => {
       if (data) {
         this.obtenerAutorizados();
@@ -75,7 +69,6 @@ export class RecogerqrPage implements OnInit {
         directory: Directory.Documents,
       });
 
-      console.log('Imagen guardada en: ', result.uri);
 
       await this.alertS.generateToastSuccess('Imagen de QR descargada');
 
@@ -142,7 +135,6 @@ export class RecogerqrPage implements OnInit {
       directory: Directory.Data,
       encoding: Encoding.UTF8,
     });
-    console.log(writeSecretFile);
   }
 
   generateQRCode() {
@@ -170,7 +162,6 @@ export class RecogerqrPage implements OnInit {
               }
               this.allToLine(this.alumnosQR);
               this.qrCodeImage = url;
-              console.log(this.qrCodeImage);
             }
           );
         }
@@ -191,7 +182,6 @@ export class RecogerqrPage implements OnInit {
       ids.push(n);
     }),
       this.filaS.postFila(ids).subscribe((alumnFilas: any) => {
-        console.log(alumnFilas);
         if (alumnFilas.length) {
           this.alertS.generateToastSuccess('Alumnos en fila');
           // this.getList(this.nivelActivo);

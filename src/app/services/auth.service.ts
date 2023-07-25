@@ -23,7 +23,6 @@ export class AuthService {
   login(body: {userWeb: string , password: string}){
     return this.http.post(`${this.URLAPI}/auth/loginTutor`, body).pipe(
       map((resp: any ) => {
-        console.log('RESPUESTA', resp);
         if(resp.tutor){
         this.guardaUsuario(resp.tutor);
        }
@@ -49,7 +48,6 @@ export class AuthService {
 
   validaToken(): boolean {
     if(!!this.token && !!this.user){
-      console.log('VALID');
       return true;
     }
     return false
@@ -59,7 +57,6 @@ export class AuthService {
 
   guardaUsuario(user: any) {
     this.user = user;
-    console.log('USUARIO MAESTROOOO', user)
     localStorage.setItem('user', JSON.stringify(user));
 
   }
@@ -72,7 +69,6 @@ export class AuthService {
   getUserId(){
     const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
    if (user !== null) {
-    console.log('user', user.id);
     return user.id
   } else {
     this.navCtrl.navigateRoot('/login');
@@ -94,14 +90,12 @@ getImagePerfil(){
 } else if(user.fotoPerfil && user.responsabilidad === undefined) {
   return user.fotoPerfilOk;
 }else {
-  console.log('no user');
   return true;
 }
 }
 
 getToken(){
   const token = localStorage.getItem('token') || null;
-  console.log(token);
   if(token !== null){
     return true;
   }
@@ -118,7 +112,6 @@ getTipoUser(){
   const user = JSON.parse(localStorage.getItem('user') || '{}')|| null;
   if (user !== null) {
    if(user.correo){
-    console.log('user prubas', user.responsabilidad);
     if(user.responsabilidad === 'fila'){
       return 'FILA';
     }
