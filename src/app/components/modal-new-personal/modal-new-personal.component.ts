@@ -57,6 +57,8 @@ export class ModalNewPersonalComponent implements OnInit {
     const blob = new Blob([ab], { type: "" });
     // Crear la URL de la imagen
     const imageUrl = URL.createObjectURL(blob);
+    this.picture = imageUrl;
+    this.nofoto = false;
     // Utilizar la URL de la imagen
     document.getElementById("imgProfMod")!.setAttribute(
       'src', imageUrl);
@@ -102,12 +104,15 @@ export class ModalNewPersonalComponent implements OnInit {
   }
 
   submitForm(){
-    this.nofoto = false;
-    if(this.fomrPersonal.invalid){
+
+    if(this.picture === './assets/logokawabata.png'){
+      this.nofoto =  true
+    }
+    console.log(this.fomrPersonal.invalid);
+    console.log(this.nofoto);
+    if(this.fomrPersonal.invalid || this.nofoto){
       this.fomrPersonal.markAllAsTouched();
-      if(this.picture === './assets/logokawabata.png'){
-        this.nofoto =  true
-      }
+      console.log(this.picture);
       return;
     }
     const formData = new FormData();

@@ -74,7 +74,7 @@ export class Tab3Page {
     const modal = await this.modalController.create({
       component: ModalNewPersonalComponent,
       mode: 'md',
-      initialBreakpoint: 0.75,
+      initialBreakpoint: 1,
       cssClass: 'email-component',
       componentProps: {
         mailTo: this.idUser
@@ -97,7 +97,7 @@ export class Tab3Page {
     const modal = await this.modalController.create({
       component: ModalNewPersonalComponent,
       mode: 'ios',
-      initialBreakpoint: 0.8,
+      initialBreakpoint: 1,
       cssClass: 'email-component',
       componentProps: {
         user: auth
