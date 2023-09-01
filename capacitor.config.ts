@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.colegiokawabata.www',
-  appName: 'appKawabata',
+  appName: 'Colegio Kawabata',
   webDir: 'www',
   bundledWebRuntime: false,
   plugins: {
