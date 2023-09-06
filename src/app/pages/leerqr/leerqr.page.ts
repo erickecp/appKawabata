@@ -163,7 +163,7 @@ export class LeerqrPage implements OnInit {
 
     this.filaS.changeState(data).subscribe((res: any) => {
       if (res.length) {
-        this.alerts.generateToastSuccess('Notificacion enviada a SALON!');
+        this.alerts.generateToastSuccess('Notificacion enviada a SALÓN!');
         this.personaAuth = null;
         this.info = null;
       }

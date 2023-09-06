@@ -37,6 +37,7 @@ export class Tab1Page {
     private sockets: SocketsService
   ) {
     this.sockets.listen(EVENTS.FILAS).subscribe( (res: any) => {
+      this.alumnosTutor = [];
       this.getAleumnos();
     })
     this.getAleumnos();
@@ -80,6 +81,7 @@ recoger(estu: any){
 }
 
 getAleumnos(){
+
   const tipouser = this.authS.getTipoUser();
   this.userId = this.authS.getUserId();
   this.user = this.authS.getUser();
@@ -108,7 +110,7 @@ getColor(estado: string){
   const obj: any = {
     0: {
       color: 'medium',
-      estate: 'Avisar a Salon'
+      estate: 'Avisar a Salón'
     },
     1: {
       color: 'medium',

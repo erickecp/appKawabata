@@ -78,6 +78,7 @@ export class PerfilPage implements OnInit {
           formData.append('email',JSON.stringify( this.usuario.email) )
           formData.append('nombres', JSON.stringify( this.usuario.nombres))
         }
+
         this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  (res: any) => {
         this.authS.modifyPerfil(res.data.fotoPerfil);
         this.alertsS.generateToastSuccess('Foto de perfil Actualizada')
