@@ -66,7 +66,7 @@ export class RecogerqrPage implements OnInit {
       const result = await Filesystem.writeFile({
         path: `${fecha}${numeroAleatorio}QR.jpeg`,
         data: this.qrCodeImage,
-        directory: Directory.Documents,
+        directory: Directory.External,
       });
 
 

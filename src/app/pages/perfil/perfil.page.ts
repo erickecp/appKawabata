@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { EVENTS } from 'src/app/enums/sockets.enum';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -26,6 +27,7 @@ export class PerfilPage implements OnInit {
     private tutoresS: TutoresService,
     private alertsS: AlertsService,
     private router: Router,
+    private pf: Platform,
     private socketsS: SocketsService,
 
   ) {
@@ -65,7 +67,26 @@ export class PerfilPage implements OnInit {
       return ;
     }
 
+    if(this.pf.is('ios')){
+      const formData = new FormData();
+      this.compressImg.uploadFile().then(({image, orientation}) => {
+
+      this.generarURL(image)
+      const bl = this.dataURItoBlob(image);
+      this.currentFile![0] = bl;
+      if(this.currentFile){
+        formData.append('fotoPerfil', this.currentFile[0]);
+        formData.append('email',JSON.stringify( this.usuario.email) )
+        formData.append('nombres', JSON.stringify( this.usuario.nombres))
+      }
+
+      this.tutoresS.fotoPerfil(this.idUsuario, formData).subscribe(  (res: any) => {
+      this.authS.modifyPerfil(res.data.fotoPerfil);
+      this.alertsS.generateToastSuccess('Foto de perfil Actualizada')
+     } )
+  });} else {
     this.alertsS.Image().then((res: any) => {
+
       if(res.data === true){
         const formData = new FormData();
         this.compressImg.uploadFile().then(({image, orientation}) => {
@@ -86,7 +107,7 @@ export class PerfilPage implements OnInit {
     });
       }});
 
-
+    }
 
   }
 

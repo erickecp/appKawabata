@@ -42,6 +42,12 @@ swiper-slide img {
   max-width: 100%;
   max-height: 100%;
 }
+.safe--area {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  --ion-safe-area-top: 20px;
+  --ion-safe-area-bottom: 20px;
+}
 
 .theme-title {
   font-weight: bold;
