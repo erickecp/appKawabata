@@ -11,6 +11,7 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { EVENTS, ROOMS } from 'src/app/enums/sockets.enum';
 import { Browser } from '@capacitor/browser';
 
+
 const IMAGE_DIR = 'stored-images';
 
 @Component({
@@ -56,6 +57,7 @@ export class RecogerqrPage implements OnInit {
 
   ngOnInit() {}
 
+
   asignAuth(ev: any) {}
 
   async descargarImagenBase64(): Promise<void> {
@@ -66,7 +68,7 @@ export class RecogerqrPage implements OnInit {
       const result = await Filesystem.writeFile({
         path: `${fecha}${numeroAleatorio}QR.jpeg`,
         data: this.qrCodeImage,
-        directory: Directory.External,
+        directory: Directory.Data,
       });
 
 
