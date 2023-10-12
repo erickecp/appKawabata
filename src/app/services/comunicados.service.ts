@@ -15,4 +15,8 @@ export class ComunicadosService {
     return this.http.get(`${this.URLAPI}/blog/filter/?dep=${dep}`);
 
   }
+
+  getSliders(){
+    return this.http.get(`${this.URLAPI}/slider`) ;
+  }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoimagePipe } from './noimage.pipe';
 import { EstadoPipe } from './estado.pipe';
+import { TildesPipe } from './tildes.pipe';
 
 
 
@@ -9,6 +10,7 @@ import { EstadoPipe } from './estado.pipe';
   declarations: [
     NoimagePipe,
     EstadoPipe,
+    TildesPipe,
   ],
   imports: [
     CommonModule
@@ -16,6 +18,7 @@ import { EstadoPipe } from './estado.pipe';
   exports: [
     NoimagePipe,
     EstadoPipe,
+    TildesPipe,
   ]
 })
 export class PipesModule { }

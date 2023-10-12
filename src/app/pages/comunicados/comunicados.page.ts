@@ -14,15 +14,25 @@ import SwiperCore, {SwiperOptions} from 'swiper';
 })
 export class ComunicadosPage implements OnInit {
 
+  sliders:any[] = []
+
   constructor(
     private modalController: ModalController,
     private blogS: ComunicadosService,
     private sockets:SocketsService
   ) {
 
+    this.getsliders();
     this.sockets.listen(EVENTS.CONFIG_USER).subscribe( res => {
     })
 
+  }
+
+  getsliders(){
+    this.blogS.getSliders().subscribe((slider: any) => {
+      console.log(slider);
+      this.sliders = slider
+    });
   }
 
   selectedFilter = '';

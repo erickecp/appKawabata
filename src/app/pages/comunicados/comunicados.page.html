@@ -6,15 +6,11 @@
 
 <ion-content>
 
-  <swiper-container  #swiper  [autoplay]="{delay: 3000}" [slidesPerView]="1.5"   >
-    <swiper-slide class="ion-padding">
-        <img class="slide-img" src="./assets/kawa.png">
-    </swiper-slide>
-    <swiper-slide class="ion-padding">
-      <img class="slide-img" src="https://img.freepik.com/vector-gratis/fondo-plano-rebajas-regreso-escuela_52683-68416.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
-    </swiper-slide>
-    <swiper-slide class="ion-padding">
-      <img class="slide-img" src="https://img.freepik.com/vector-gratis/ilustracion-plana-fiesta-regreso-escuela_23-2149477157.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
+  <swiper-container  #swiper
+    [autoplay]="{delay: 3000}"
+     [slidesPerView]="1.5"   >
+    <swiper-slide  class="ion-padding " *ngFor="let sl of sliders">
+        <img width="100%"  class="slide-img configuration" [src]="getImage(sl.image)">
     </swiper-slide>
   </swiper-container>
 
@@ -59,10 +55,10 @@
       <ion-row>
         <ion-col size="12" *ngFor="let com of  comunicadosFilter">
           <ion-card (click)="openModalComunicado(com)">
-            <ion-grid>
+            <ion-grid style="max-height: 250px;">
               <ion-row>
                 <ion-col  size="5">
-                  <img [src]="getImage(com.image)  " class="img-fluid"  style="width: 100%;"alt="">
+                  <img [src]="getImage(com.image)  " class="img-fluid"  style="width: 100%; max-height: 230px !important;" alt="">
                 </ion-col>
                 <ion-col size="7">
                   <ion-card-content style="color: black" >

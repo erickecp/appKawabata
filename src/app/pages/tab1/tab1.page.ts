@@ -26,7 +26,10 @@ export class Tab1Page {
   urlImg= environment.URLAPIIMG;
   user!: any;
   color = 'primary';
+  salidas = ['Puerta 1', 'Puerta 2'];
   alumnosTutor: any[] = [];
+  puerta = '';
+  alumnosTutorFiltrados: any[] = [];
   constructor(
     private personalS:PersonalAuthService,
     private alerts: AlertsService,
@@ -41,6 +44,30 @@ export class Tab1Page {
       this.getAleumnos();
     })
     this.getAleumnos();
+  }
+
+
+  segmentChanged(e: any){
+    this.alumnosTutorFiltrados = this.alumnosTutor;
+    console.log('segment', this.alumnosTutorFiltrados);
+    this.puerta = e.detail.value;
+    if(this.puerta === 'Puerta 2'){
+      console.log('Entro 1');
+      this.alumnosTutorFiltrados = this.alumnosTutorFiltrados.filter( al => (al.student.nivel === '11'  && al.student.grado >= 3) );
+    console.log( 'Filtrados', this.alumnosTutorFiltrados);
+
+    }else {
+      console.log('Entro 2');
+      this.alumnosTutorFiltrados = this.alumnosTutorFiltrados.filter( al => (al.student.nivel !== '11' && al.student.grado <=3) );
+    console.log( 'Filtrados', this.alumnosTutorFiltrados);
+
+    }
+    // this.alumnosTutorFiltrados = [];
+
+
+
+
+
   }
 
 enviaraFila(alumno: any){
@@ -88,22 +115,45 @@ getAleumnos(){
   if(tipouser === 'FILA'){
     this.filaS.alumnosfila().subscribe(
       (resp: any) => {
+        console.log('REPS', resp)
          this.alumnosTutor = resp;
+         this.alumnosTutorFiltrados = resp;
       }
     )
   }else if(tipouser === 'ENTREGAR'){
     this.filaS.alumnosfila3().subscribe(
       (resp: any) => {
          this.alumnosTutor = resp;
+         this.alumnosTutorFiltrados = resp;
       }
     )
   } else {
   this.filaS.getSyudentsFila(this.user.grupoAsignado, this.userId).subscribe(
     (resp: any) => {
        this.alumnosTutor = resp;
+       this.alumnosTutorFiltrados = resp;
+       console.log(this.alumnosTutorFiltrados)
     }
   )
 }
+}
+
+getNivel(nivel: any, grado: any){
+
+  if(Number(nivel) === 11){
+    if(Number(grado) <= 3){
+      return 'Primaria Baja'
+    }else{
+      return 'Primaria Alta'
+    }
+  } else if(Number(nivel) === 9){
+    return 'Preescolar'
+  } else{
+    return 'Secundaria'
+  }
+
+  return 'default'
+
 }
 
 getColor(estado: string){

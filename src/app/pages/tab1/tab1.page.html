@@ -1,6 +1,6 @@
   <ion-toolbar class="safe--area ion-text-center">
     <ion-title  color="light" class="theme-title">
-      {{user.responsabilidad ? (user.responsabilidad | uppercase)  : ' ' }}
+      {{(user.responsabilidad ? (user.responsabilidad | uppercase)  : ' ') | tildes }}
     </ion-title>
 
   </ion-toolbar>
@@ -9,8 +9,20 @@
   <ion-text color="tertiary"  >
     <h1  class="ion-padding">RECOGER A: </h1>
   </ion-text>
-<div *ngIf="alumnosTutor.length">
-  <ion-card *ngFor="let a of alumnosTutor; let i = index" color="primary" >
+
+  <ion-segment value="Puerta 1" color="tertiary"
+  (ionChange)="segmentChanged($event)">
+    <ion-segment-button  *ngFor="let n of salidas" [value]="n">
+      <ion-label>{{n}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+<div *ngIf="alumnosTutorFiltrados.length">
+  <ion-card *ngFor="let a of alumnosTutorFiltrados; let i = index" color="primary" >
+    <ion-card-header color="primary">
+      <ion-card-title>{{getNivel(a.student.nivel, a.student.grado)}}</ion-card-title>
+    </ion-card-header>
+
     <ion-card-header class="ion-no-padding">
       <ion-item lines="none" >
         <ion-avatar slot="start">
