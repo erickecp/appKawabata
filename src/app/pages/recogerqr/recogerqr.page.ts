@@ -10,6 +10,7 @@ import { SocketsService } from 'src/app/services/sockets.service';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { EVENTS, ROOMS } from 'src/app/enums/sockets.enum';
 import { Browser } from '@capacitor/browser';
+import { Platform } from '@ionic/angular';
 
 
 const IMAGE_DIR = 'stored-images';
@@ -36,7 +37,8 @@ export class RecogerqrPage implements OnInit {
     private authS: AuthService,
     private personalS: PersonalAuthService,
     private filaS: FilaService,
-    private socketsS: SocketsService
+    private socketsS: SocketsService,
+    private readonly platform: Platform
   ) {
     this.personalS.getNewPer.subscribe((data) => {
       if (data) {
@@ -68,7 +70,7 @@ export class RecogerqrPage implements OnInit {
       const result = await Filesystem.writeFile({
         path: `${fecha}${numeroAleatorio}QR.jpeg`,
         data: this.qrCodeImage,
-        directory: Directory.Data,
+        directory: this.platform.is('ios')?Directory.Data: Directory.Documents,
       });
 
 
