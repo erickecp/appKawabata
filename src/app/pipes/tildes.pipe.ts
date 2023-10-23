@@ -11,7 +11,7 @@ export class TildesPipe implements PipeTransform {
     if(value === 'SALON' ){
       return 'SALÓN';
     }
-    return 'null';
+    return value;
   }
 
 }
