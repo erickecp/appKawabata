@@ -42,12 +42,14 @@ export class Tab1Page {
     this.sockets.listen(EVENTS.FILAS).subscribe( (res: any) => {
       this.alumnosTutor = [];
       this.getAleumnos();
+      this.segmentChanged({detail: { value: 'Puerta 1'}})
     })
     this.getAleumnos();
   }
 
 
   segmentChanged(e: any){
+    console.log(e, 'KKKK')
     this.alumnosTutorFiltrados = this.alumnosTutor;
     console.log('segment', this.alumnosTutorFiltrados);
     this.puerta = e.detail.value;
