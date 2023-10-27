@@ -36,8 +36,6 @@ export class Tab1Page {
     private sockets: SocketsService
   ) {
     this.sockets.listen(EVENTS.FILAS).subscribe((res: any) => {
-      this.alumnosTutorFiltrados = [];
-      this.alumnosTutor = [];
       console.log(res);
       this.getAleumnos();
       if (res) {
