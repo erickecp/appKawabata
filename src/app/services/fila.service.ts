@@ -21,7 +21,7 @@ export class FilaService {
     return this.http.get(`${this.URLAPI}/filas/alumnos/${id}?term=${term}`);
   }
   getSyudentsFilaTutor(id: any){
-    return this.http.get(`${this.URLAPI}/filas/alumnos2/${id}`);
+    return this.http.get(`${this.URLAPI}/filas/alumnos/${id}`);
   }
   alumnosfila(){
     return this.http.get(`${this.URLAPI}/filas/alumnosfila`);
