@@ -6,15 +6,10 @@
 
 <ion-content [fullscreen]="true">
   <swiper-container  #swiper  [autoplay]="{delay: 3000}"   >
-    <swiper-slide class="ion-padding">
-        <img width="100%" height="100%" src="./assets/kawa.png">
+    <swiper-slide class="ion-padding" *ngFor="let slide of sliders">
+        <img width="100%" height="100%" [src]="getImage(slide.image)">
     </swiper-slide>
-    <swiper-slide class="ion-padding">
-      <img width="100%" height="100%" src="https://img.freepik.com/vector-gratis/fondo-plano-rebajas-regreso-escuela_52683-68416.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
-    </swiper-slide>
-    <swiper-slide class="ion-padding">
-      <img width="100%" height="100%" src="https://img.freepik.com/vector-gratis/ilustracion-plana-fiesta-regreso-escuela_23-2149477157.jpg?size=626&ext=jpg&ga=GA1.1.1705366310.1678251884&semt=sph">
-    </swiper-slide>
+
   </swiper-container>
 
     <ion-grid fixed>

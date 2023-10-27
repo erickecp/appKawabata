@@ -40,9 +40,15 @@ export class Tab1Page {
     private sockets: SocketsService
   ) {
     this.sockets.listen(EVENTS.FILAS).subscribe( (res: any) => {
+      this.alumnosTutorFiltrados = [];
       this.alumnosTutor = [];
+      console.log(res);
       this.getAleumnos();
-      this.segmentChanged({detail: { value: 'Puerta 1'}})
+      if( res.student.nivel === '11' && res.student.grado >= 3){
+        this.segmentChanged({detail: { value: 'Puerta 2'}});
+      }else {
+        this.segmentChanged({detail: { value: 'Puerta 1'}});
+      }
     })
     this.getAleumnos();
   }
@@ -110,7 +116,6 @@ recoger(estu: any){
 }
 
 getAleumnos(){
-
   const tipouser = this.authS.getTipoUser();
   this.userId = this.authS.getUserId();
   this.user = this.authS.getUser();

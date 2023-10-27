@@ -9,6 +9,8 @@ import { SocketsService } from 'src/app/services/sockets.service';
 import { EVENTS } from 'src/app/enums/sockets.enum';
 import { Platform } from '@ionic/angular';
 import { PushNotificationConfig } from 'src/app/tools/push-notification-configuration';
+import { ComunicadosService } from 'src/app/services/comunicados.service';
+import { environment } from 'src/environments/environment';
 SwiperCore.use([Autoplay]);
 @Component({
   selector: 'app-tab2',
@@ -18,15 +20,19 @@ SwiperCore.use([Autoplay]);
 export class Tab2Page implements OnInit {
   @ViewChild('swiper')
   swiperRef: Swiper | undefined;
+  imgUrl = environment.URLAPIIMG;
   user: any;
+  sliders:  any[] = [];
   constructor(
     private platform: Platform,
     private alertsS:AlertsService,
+    private blogS: ComunicadosService,
     private socketS: SocketsService,
     private authS: AuthService,
     private pushNotification: PushNotificationConfig,
     private navigate: Router,
   ) {
+    this.getsliders();
     this.user = this.authS.getTipoUser();
     this.socketS.listen(EVENTS.CONFIG_USER).subscribe(res => {
       console.log(res);
@@ -43,6 +49,19 @@ export class Tab2Page implements OnInit {
       this.pushNotification.init();
     }
   }
+
+  getsliders(){
+    this.blogS.getSliders().subscribe((slider: any) => {
+      console.log(slider);
+      this.sliders = slider
+    });
+  }
+
+  getImage(name: string){
+    return `${this.imgUrl}${name}`;
+ // this.gs.get(`http://localhost:3006/api/maestros/file/${name}`).subscribe(
+ }
+
 
 
 recoger(){
