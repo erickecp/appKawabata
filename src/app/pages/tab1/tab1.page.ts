@@ -63,13 +63,13 @@ export class Tab1Page {
     if (this.puerta === 'Puerta 2') {
       console.log('Entro 1');
       this.alumnosTutorFiltrados = this.alumnosTutorFiltrados.filter(
-        (al) => al.student.nivel === '11' && al.student.grado >= 3
+        (al) => Number(al.student.nivel) === 11 && Number(al.student.grado) >= 3
       );
       console.log('Filtrados', this.alumnosTutorFiltrados);
     } else {
       console.log('Entro 2');
       this.alumnosTutorFiltrados = this.alumnosTutorFiltrados.filter(
-        (al) => al.student.nivel !== '11' && al.student.grado <= 3
+        (al) => Number(al.student.nivel) !== 11 && Number(al.student.grado) < 3
       );
       console.log('Filtrados', this.alumnosTutorFiltrados);
     }
