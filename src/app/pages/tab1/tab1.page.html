@@ -10,7 +10,7 @@
     <h1  class="ion-padding">RECOGER A: </h1>
   </ion-text>
 
-  <ion-segment value="Puerta 1" color="tertiary"
+  <ion-segment #segment value="Puerta 1" color="tertiary"
   (ionChange)="segmentChanged($event)">
     <ion-segment-button  *ngFor="let n of salidas" [value]="n">
       <ion-label>{{n}}</ion-label>

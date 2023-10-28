@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import { Share } from '@capacitor/share';
 import { PersonalAuthService } from 'src/app/services/personal-auth.service';
 import { AuthService } from '../../services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -10,6 +9,7 @@ import { AlertsService } from 'src/app/services/alerts.service';
 import { environment } from 'src/environments/environment';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { EVENTS } from 'src/app/enums/sockets.enum';
+import { IonSegment } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -17,6 +17,8 @@ import { EVENTS } from 'src/app/enums/sockets.enum';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
+@ViewChild('segment', { static: true }) segment!: IonSegment
+
   backgroundUrl = './assets/descarga.png';
   userId!: number;
   urlImg = environment.URLAPIIMG;
@@ -36,7 +38,6 @@ export class Tab1Page {
     private sockets: SocketsService
   ) {
     this.sockets.listen(EVENTS.FILAS).subscribe((res: any) => {
-      console.log(res);
       this.getAleumnos();
       if (res) {
         if (
@@ -53,19 +54,16 @@ export class Tab1Page {
     this.getAleumnos();
   }
 
+
   segmentChanged(e: any) {
-    console.log(e, 'KKKK');
+    this.segment.value = e.detail.value;
     this.alumnosTutorFiltrados = this.alumnosTutor;
-    console.log('segment', this.alumnosTutorFiltrados);
     this.puerta = e.detail.value;
     if (this.puerta === 'Puerta 2') {
-      console.log('Entro 1');
       this.alumnosTutorFiltrados = this.alumnosTutorFiltrados.filter(
         (al) => Number(al.student.nivel) === 11 && Number(al.student.grado) >= 3
       );
-      console.log('Filtrados', this.alumnosTutorFiltrados);
     } else {
-      console.log('Entro 2');
       this.alumnosTutorFiltrados = this.alumnosTutorFiltrados.filter(
         (al) => Number(al.student.nivel) !== 11 && Number(al.student.grado) < 3
       );
@@ -120,7 +118,7 @@ export class Tab1Page {
       this.filaS.alumnosfila3().subscribe((resp: any) => {
         this.alumnosTutor = resp;
         this.alumnosTutorFiltrados = resp;
-      });
+      })
     } else {
       this.filaS
         .getSyudentsFila(this.user.grupoAsignado, this.userId)
